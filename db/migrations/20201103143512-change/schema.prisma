@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -90,7 +90,7 @@ model Product {
 model Cart {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  quantity  Int?    
+  quantity  Float?    
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
   productPrice Float?      
@@ -106,7 +106,7 @@ model Order {
   phone        String?        
   address      String?        
   pinCode      String? 
-  city         String?       
+  city         String       
   user         User          @relation(fields: [userId], references: [id])
   userId       Int           
   orderDetails OrderDetail[] 
@@ -123,7 +123,7 @@ model OrderDetail {
   quantity  Float    
   order     Order    @relation(fields: [orderId], references: [id])
   orderId   Int
-  goodsId   Int
+  goodsId   Int?
   productPrice Float    
 }
 
