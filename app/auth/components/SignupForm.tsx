@@ -3,6 +3,8 @@ import { LabeledTextField } from "app/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/components/Form"
 import signup from "app/auth/mutations/signup"
 import { SignupInput, SignupInputType } from "app/auth/validations"
+import styles from '../../styles/Login.module.scss'
+import { Link } from "blitz"
 
 type SignupFormProps = {
   onSuccess?: () => void
@@ -10,10 +12,11 @@ type SignupFormProps = {
 
 export const SignupForm = (props: SignupFormProps) => {
   return (
-    <div>
-      <h1>Create an Account</h1>
+    <div className={styles.mainDiv}>
+      <h1 className={styles.head}>Create an Account</h1>
 
       <Form<SignupInputType>
+        className={styles.form}
         submitText="Create Account"
         schema={SignupInput}
         initialValues={{ email: "", password: "" }}
@@ -31,9 +34,10 @@ export const SignupForm = (props: SignupFormProps) => {
           }
         }}
       >
-        <LabeledTextField name="email" label="Email" placeholder="Email" />
-        <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
+        <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" />
+        <LabeledTextField className={styles.input} name="password" label="Password" placeholder="Password" type="password" />
       </Form>
+      <Link href="login"><a className={styles.anchor}>alreay have account?? Login</a></Link>
     </div>
   )
 }

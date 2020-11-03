@@ -34,13 +34,14 @@
     "@prisma/cli": "2.x",
     "@prisma/client": "2.x",
     "blitz": "0.24.3",
+    "final-form": "4.20.1",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.2",
+    "react-final-form": "6.5.2",
+    "sass": "1.28.0",
     "secure-password": "4.0.0",
-    "zod": "1.11.10",
-    "final-form": "4.20.1",
-    "react-final-form": "6.5.2"
+    "zod": "1.11.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.11.5",
