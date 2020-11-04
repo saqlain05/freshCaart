@@ -31,6 +31,12 @@
     ]
   },
   "dependencies": {
+    "font-awesome": "4.7.0",
+    "@fortawesome/fontawesome-svg-core": "1.2.32",
+    "@fortawesome/free-brands-svg-icons": "5.15.1",
+    "@fortawesome/free-regular-svg-icons": "5.15.1",
+    "@fortawesome/free-solid-svg-icons": "5.15.1",
+    "@fortawesome/react-fontawesome": "0.1.11",
     "@prisma/cli": "2.x",
     "@prisma/client": "2.x",
     "blitz": "0.24.3",
