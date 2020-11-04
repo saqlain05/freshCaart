@@ -1,8 +1,10 @@
-import { Link, BlitzPage } from "blitz"
+import { Link, BlitzPage, useQuery, useSession } from "blitz"
 import Layout from "app/layouts/Layout"
 import logout from "app/auth/mutations/logout"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
-import { Suspense } from "react"
+import { Suspense, useContext } from "react"
+import ItemContext from "app/contexts/ItemContext"
+import getCarts from "app/carts/queries/getCarts"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -11,8 +13,12 @@ import { Suspense } from "react"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
-
+  const {setShow} = useContext(ItemContext)
+ 
   if (currentUser) {
+    
+    const basket = JSON.parse(window.localStorage.getItem('cart'))
+    if(basket.cart.length > 0) setShow(true)
     return (
       <>
         <button
