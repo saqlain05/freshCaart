@@ -1,0 +1,114 @@
+.mainDiv{
+
+    .Heading{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        // margin: 0 5rem;
+        margin-top: 1rem;
+
+        .head1{
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .head2{
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.fulldiv{
+    display: flex;
+    // border: 2px solid black;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background-color: #fff;
+    height: 20vh;
+    margin-top: .5rem;
+    border-radius: 15px;
+
+    .image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        // border: 2px solid black;
+        width: 85%;
+        height: 80%;
+        .img{
+            width: 90%;
+            height: 100%;
+        }
+    }
+
+    .items{
+        flex: 2;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: .61rem;
+        // border: 2px solid black;
+
+        .title{
+            font-size: 1.3rem;
+        }
+        .para3{
+            font-size: .8rem;
+
+            .span3{
+                font-weight: 700;
+            }
+        }
+
+        .item{
+            display: flex;
+            justify-content: space-between;
+
+            .para{
+                font-size: .8rem;
+
+                .span{
+                    font-weight: 900;
+                }
+            }
+
+            .button{
+                display: flex;
+                gap: .2rem;
+                justify-content: center;
+                align-items: center;
+                margin-right: .2rem;
+
+
+                .plus{
+                    background-color: #007E3E;
+                    color: #fff;
+                    border-radius: 20px;
+                    width: 2.5rem;
+                    height: 1.3rem;
+                    border: 1px solid #007E3E;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+                .para2{
+                    font-size: .8rem;
+
+                    .span2{
+                        font-weight: 800;
+                    }
+                }
+                
+            }
+        }
+
+        
+    }
+}
+
