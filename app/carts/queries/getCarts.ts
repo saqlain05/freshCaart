@@ -5,9 +5,9 @@ type GetCartsInput = Pick<FindManyCartArgs, "where" | "orderBy" | "skip" | "take
 
 export default async function getCarts(
   { where, orderBy, skip = 0, take, include }: GetCartsInput,
-  ctx: Ctx
+  
 ) {
-  ctx.session.authorize()
+  
 
   const carts = await db.cart.findMany({
     where,
