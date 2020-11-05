@@ -13,7 +13,7 @@ const Header = () => {
         <>
            <div className={styles.mainDiv}>
                <div className={styles.logo}>
-                   <Link href="products"><a>
+                   <Link href="/products"><a>
                    <img className={styles.logoImg} src="http://res.cloudinary.com/dlccpotyg/image/upload/v1603447476/xianlfnpxse0t7xptsnd.png" alt="Logo Not Found"/>
                    </a></Link>
                </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import styles from '../../styles/Cart.module.scss';
 import CartList from './CartList';
 
@@ -11,7 +11,7 @@ const Cart = () => {
                    <h2 className={styles.head2}>Verify Your Order Items</h2>
                </div>
                <div className={styles.items}>
-                   <CartList />
+                   <Suspense fallback='loading'> <CartList /></Suspense>
                </div>
             </div> 
         </>
