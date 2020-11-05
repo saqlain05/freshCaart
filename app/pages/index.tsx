@@ -4,8 +4,6 @@ import logout from "app/auth/mutations/logout"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { Suspense, useContext } from "react"
 import ItemContext from "app/contexts/ItemContext"
-import getCarts from "app/carts/queries/getCarts"
-import PrePrep from "app/components/PrePrep"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -22,7 +20,6 @@ const UserInfo = () => {
     if(basket.cart.length > 0) setShow(true)
     return (
       <>
-      <PrePrep userId={currentUser.id}/>
         <button
           className="button small"
           onClick={async () => {

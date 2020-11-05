@@ -5,11 +5,11 @@ import { Form, FORM_ERROR } from "app/components/Form"
 import login from "app/auth/mutations/login"
 import { LoginInput, LoginInputType } from "app/auth/validations"
 import styles from '../../styles/Login.module.scss'
-type LoginFormProps = {
-  onSuccess?: () => void
-}
+// type LoginFormProps = {
+//   onSuccess?: () => void
+// }
 
-export const LoginForm = (props: LoginFormProps) => {
+export const LoginForm = ({handleLogin}) => {
   return (
     <div className={styles.mainDiv}>
       <h1 className={styles.head}>Login</h1>
@@ -21,8 +21,8 @@ export const LoginForm = (props: LoginFormProps) => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
           try {
-            await login({ email: values.email, password: values.password })
-            props.onSuccess && props.onSuccess()
+            const user = await login({ email: values.email, password: values.password })
+            handleLogin(user)
           } catch (error) {
             if (error.name === "AuthenticationError") {
               return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
