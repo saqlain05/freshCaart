@@ -6,9 +6,20 @@ import { LoginForm } from "app/auth/components/LoginForm"
 const LoginPage: BlitzPage = () => {
   const router = useRouter()
 
+  const cartObject = {
+    cart: [],
+    totalQty: 0,
+    totalAmount: 0
+  }
+
+  const handleLogin = () => {
+    window.localStorage.setItem('cart', JSON.stringify(cartObject))
+    router.push('/')
+  }
+
   return (
     <div>
-      <LoginForm onSuccess={() => router.push("/")} />
+      <LoginForm onSuccess={handleLogin} />
     </div>
   )
 }

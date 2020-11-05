@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -84,7 +84,7 @@ model Product {
   measureUnit String   
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int  
-  cart        Cart?    
+  cart        Cart[]    
 }
 
 model Cart {
