@@ -1,0 +1,72 @@
+.mainDiv{
+    width: 80%;
+    margin: auto;
+    gap:1rem;
+
+    .orders{
+        margin-bottom: 1rem;
+
+        .orderHead{
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: .8rem;
+            
+
+        }
+
+        .order{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+
+            .orderHead1{
+
+                font-size: 1rem;
+                font-weight: 500;
+
+            }
+
+            .span{
+                font-weight: 700;
+
+            }
+        }
+        .orderHead2{
+            font-size: 1.5rem;
+            font-weight: 700;
+            // margin-top: 2rem;
+            margin-bottom: .41rem;
+
+        }
+        .orderHead3{
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+
+        }
+    }
+
+    .payment{
+        margin-bottom: 1rem;
+
+        .orderHead4{
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+        .radio{
+            // display: flex;
+
+            .pSpan{
+                font-size: 1.2rem;
+                margin-left: 1rem;
+            }
+            .sSpan2{
+                font-weight: 700;
+            }
+        }
+    }
+}

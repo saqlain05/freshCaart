@@ -8,8 +8,14 @@
     margin-top: .5rem;
     margin-bottom: 2rem;
     // margin-right: .5rem;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    :hover{
+        transform: scale(1.03);
+    }
 
 .maindiv{
+    margin-top: 1rem;
     $backgroundColor: #fff;
     $title: black;
     $span : #007E3E;
@@ -22,7 +28,11 @@
     // box-shadow: 1px solid black;
     justify-content: space-between;
     background-color: $backgroundColor;
-    box-shadow: 0 4px 8px 0 rgba( #005E2E, 0.5), 0 6px 20px 0 rgba( #005E2E, 0.49);
+    
+    box-shadow: 0 4px 8px 0 rgba( #005E2E, 0.1), 0 6px 20px 0 rgba( #005E2E, 0.09);
+
+    
+    
 
     .images{
         // border: 2px solid black;
@@ -114,7 +124,7 @@
     .div{
         display: flex;
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: .1rem;
         // border: 1px solid black;
         width: 90%;
         margin: auto;

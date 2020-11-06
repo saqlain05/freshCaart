@@ -36,8 +36,7 @@
     "@fortawesome/free-regular-svg-icons": "5.15.1",
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.11",
-    "@prisma/cli": "2.x",
-    "@prisma/client": "2.x",
+    "@prisma/client": "2.10.2",
     "blitz": "0.24.3",
     "final-form": "4.20.1",
     "font-awesome": "4.7.0",
@@ -50,6 +49,7 @@
     "zod": "1.11.10"
   },
   "devDependencies": {
+    "@prisma/cli": "2.10.2",
     "@testing-library/jest-dom": "5.11.5",
     "@testing-library/react": "11.1.0",
     "@testing-library/react-hooks": "3.4.2",

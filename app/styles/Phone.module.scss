@@ -1,0 +1,31 @@
+.mainDiv{
+
+    .empty{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .icon{
+            width: 20vw;
+            height: 15vh;
+            color: #45F39B;
+
+        }
+        .h2{
+
+
+        }
+        .h3{
+            margin-top: 1rem;
+            font-weight: 700;
+            font-size: 2rem;
+
+        }
+        .h4{
+            font-size: 1.3rem;
+            font-weight: 100;
+
+        }
+    }
+}

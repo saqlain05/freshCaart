@@ -27,7 +27,7 @@ const Header = () => {
                <div className={styles.dropdown} >
                     <button className={styles.dropbtn}><FontAwesomeIcon icon={faUserCircle} className={styles.ProfileIcons}  /></button>
                         <div  className={styles.dropdownContent}>
-                            <Link href="products/new">
+                            <Link href="/profiles">
                             <a>Profile</a>
                             </Link>
                             {/* <a href="#">Logout</a> */}

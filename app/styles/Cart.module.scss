@@ -53,10 +53,22 @@
         justify-content: center;
         gap: .61rem;
         // border: 2px solid black;
-
-        .title{
-            font-size: 1.3rem;
+        .titles{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .title{
+                font-size: 1.3rem;
+            }
+            .title1{
+                font-size: 1.3rem;
+                margin-right: 1.2rem;
+                color: red;
+                cursor: pointer;
+                border: none;
+            }
         }
+        
         .para3{
             font-size: .8rem;
 
@@ -89,7 +101,7 @@
                     background-color: #007E3E;
                     color: #fff;
                     border-radius: 20px;
-                    width: 2.5rem;
+                    width: 2rem;
                     height: 1.3rem;
                     border: 1px solid #007E3E;
                     display: flex;

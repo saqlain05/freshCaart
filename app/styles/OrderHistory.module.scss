@@ -1,0 +1,103 @@
+.mainDiv{
+    width: 90%;
+    margin: auto;
+
+    .heading{
+
+        .head{
+            margin-bottom: 08px;
+
+
+        }
+    }
+    
+    .orders{
+        display: flex;
+        gap: 1rem;
+        background-color: #ffff;
+        border: .1px solid black;
+        border-radius: 07px;
+        padding: 5px 5px;
+        padding-bottom: 5px;
+        margin-bottom: 07px;
+
+        .title{
+            // border: 1px solid black;
+            width: 10rem;
+            background-color: #ffff;
+
+            .head1{
+                font-size: .6rem;
+                font-weight: 500;
+                margin-top: .1rem;
+                background-color: #ffff;
+
+            }
+
+        }
+
+        .titleBold{
+            width: 10rem;
+            // border: 1px solid black;
+            background-color: #ffff;
+
+            .head2{
+                font-size: .6rem;
+                font-weight: 900;
+                margin-top: .1rem;
+                background-color: #ffff;
+
+            }
+        }
+
+        .button{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            // border: 2px solid black;
+            width: 15rem;
+            align-items: center;
+            background-color: #ffff;
+
+            .head3{
+                width: 5rem;
+                border-radius: 20px;
+                background-color: #213ED9;
+                color: white;
+                padding: 1px 5px;
+                border: none;
+                margin-top: .5rem;
+
+            }
+            .head4{
+                font-size: .8rem;
+                background-color: #ffff;
+
+            }
+
+            .headPending{
+                width: 5rem;
+                border-radius: 20px;
+                background-color: #F8C84C;
+                color: Black;
+                padding: 2px 5px;
+                border: none;
+                margin-top: .5rem;
+                font-weight: 700;
+
+            }
+
+            .headDeliver{
+                width: 5rem;
+                border-radius: 20px;
+                background-color: #17B871;
+                color: white;
+                padding: 2px 5px;
+                border: none;
+                margin-top: .5rem;
+                font-weight: 500;
+
+            }
+        }
+    }
+}
