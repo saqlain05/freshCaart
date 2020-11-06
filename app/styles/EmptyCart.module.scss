@@ -1,0 +1,31 @@
+.mainDiv{
+
+    .empty{
+        width: 100%;
+        height: 40vh;
+        // border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        .icon{
+            width: 30vw;
+            height: 20vh;
+
+        }
+        .h2{
+
+        }
+        .button{
+            background-color: #45F39B;
+            color: black;
+            padding: .3rem 1rem;
+            border-radius: 20px;
+            font-size: .7rem;
+            margin-top: 1rem;
+
+        }
+
+    }
+}
