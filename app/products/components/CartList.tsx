@@ -13,7 +13,7 @@ const CartList = () => {
             {carts.map((carts) => (
             //   <h1>{carts.productPrice}</h1>
             
-            <div className={styles.fulldiv}>
+            <div className={styles.fulldiv} key={carts.product.id}>
                 <div className={styles.image}>
                     {/* <img className={styles.img} src="https://images-na.ssl-images-amazon.com/images/I/61yXL70-RaL._SX679_.jpg" alt="Potato img" /> */}
                     <img className={styles.img} src={carts.product.imageUrl} alt="Potato img" />
