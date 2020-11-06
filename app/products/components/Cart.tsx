@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import styles from '../../styles/Cart.module.scss';
 import CartList from './CartList';
+import FooterCart from './FooterCart';
 
 const Cart = () => {
     return (
@@ -11,7 +12,9 @@ const Cart = () => {
                    <h2 className={styles.head2}>Verify Your Order Items</h2>
                </div>
                <div className={styles.items}>
-                   <Suspense fallback='loading'> <CartList /></Suspense>
+                    <Suspense fallback='loading'> 
+                       <CartList />
+                    </Suspense>
                </div>
             </div> 
         </>

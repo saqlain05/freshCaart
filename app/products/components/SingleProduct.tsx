@@ -50,6 +50,8 @@ const SingleProduct = ({product, cartList}) => {
        const check = qty - 1
        if(check < product.minQuantity) {
         setHide(!hide)
+        setQty(1)
+        setAmt(product.price)
         setTestId(-1)
         const bakset = JSON.parse(window.localStorage.getItem('cart'))
         bakset.cart.forEach(list => {
@@ -80,10 +82,10 @@ const SingleProduct = ({product, cartList}) => {
            setQty(qty - 1)
            setAmt((qty - 1) * product.price)
            const bakset = JSON.parse(window.localStorage.getItem('cart'))
-           bakset.cart.forEach(cart => {
-               if(cart.productId === product.id) {
-                    --cart.quantity
-                    cart.price -= product.price
+           bakset.cart.forEach(carts => {
+               if(carts.productId === product.id) {
+                    --carts.quantity
+                    carts.price -= product.price
                }
            })
            --bakset.totalQty
@@ -122,7 +124,7 @@ const SingleProduct = ({product, cartList}) => {
             <div className={styles.items}>
                 <h2 className={styles.title}>{product.name}</h2>
                 <div className={styles.prices}>
-                <h5 className={styles.price}>{qty} <span className={styles.price2}>{product.measureUnit}</span></h5>
+                <h5 className={styles.price}>{qty} <span className={styles.price2}>Kg</span></h5>
                 <h5 className={styles.price}>Rs <span className={styles.price2}>{amt}</span></h5>
                 </div>
                 <p className={styles.para}>(Minimum Order Quantity - <span className={styles.para2}>{product.minQuantity}</span> KG)</p>

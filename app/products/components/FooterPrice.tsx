@@ -29,7 +29,7 @@ const FooterPrice = () => {
                 })
                 console.log(insertCart)
             })
-            router.push('/')
+            router.push('/products/cart')
         } catch (error) {
             console.log(error)
         }
