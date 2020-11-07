@@ -26,6 +26,8 @@ const LoginPage: BlitzPage = ({data}) => {
   }
 
   const handleLogin = (user) => {
+    window.localStorage.setItem('flag', 'false')
+    cookie.set('token', user.id)
     const lists = data.carts.filter(cart => cart.userId === user.id)
     window.localStorage.setItem('cart', JSON.stringify(cartObject))
     const basket = JSON.parse(window.localStorage.getItem('cart'))
@@ -42,7 +44,6 @@ const LoginPage: BlitzPage = ({data}) => {
         basket.totalQty += list.quantity
       })
       window.localStorage.setItem('cart', JSON.stringify(basket))
-      cookie.set('token', user.id)
     }
     router.push('/products') 
   }
