@@ -7,7 +7,7 @@ export default async function getProfile({ where }: GetProfileInput, ) {
 
   const profile = await db.profile.findFirst({ where })
 
-  if (!profile) throw new NotFoundError()
+  if (!profile) return null
 
   return profile
 }
