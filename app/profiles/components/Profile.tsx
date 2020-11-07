@@ -59,7 +59,7 @@ const Profile = () => {
             }}>
                 {({ handleSubmit })=>(
                     <form className={styles.formDiv} onSubmit={handleSubmit}>
-                        <Field name="firstName">
+                        <Field name="firstName" >
                             {({input})=>(
                                 <input placeholder="First Name" type="text" {...input} />
                             )}
