@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../../styles/Header.module.scss'
 import { faHome,faShoppingCart,faUser,faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useMutation } from 'blitz';
+import { Link, Router, useMutation } from 'blitz';
 import logout from 'app/auth/mutations/logout';
 import { useCurrentUser } from 'app/hooks/useCurrentUser';
 
@@ -39,8 +39,10 @@ const Header = () => {
                             {/* <a href="#">Logout</a> */}
 
                             <a style={{cursor:'pointer'}}
-                            onClick={async () => {
-                                await logoutMutation()
+                            onClick={() => {
+                                window.localStorage.setItem('flag', 'true')
+                                Router.push('/')
+                                //await logoutMutation()
                             }}
                             >
                             Logout

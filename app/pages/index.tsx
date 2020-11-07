@@ -1,9 +1,24 @@
+import logout from 'app/auth/mutations/logout'
 import Layout from 'app/layouts/Layout'
 import { Link } from 'blitz'
-import React from 'react'
+import React, { useEffect } from 'react'
+import cookie from 'js-cookie'
 import styles from '../styles/FrontPage.module.scss'
 
 const index = () => {
+  useEffect(() => {
+    const handleLogout = async () => {
+      await logout()
+      cookie.remove('token')
+      window.localStorage.removeItem('cart')
+      window.localStorage.removeItem('flag')
+    }
+    let value = JSON.parse(window.localStorage.getItem('flag'))
+    if(value === null) value = 0
+    if(value.toString() === 'true'){
+      handleLogout()
+    }
+  }, [])
   return (
     <div>
       <div className={styles.mainDiv}>
