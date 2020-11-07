@@ -30,6 +30,12 @@ const Header = () => {
                             <Link href="/profiles">
                             <a>Profile</a>
                             </Link>
+                            <Link href="/orders/myorder">
+                            <a>MyOrder</a>
+                            </Link>
+                            <Link href="/orders/orderhistory">
+                            <a>OrderHistory</a>
+                            </Link>
                             {/* <a href="#">Logout</a> */}
 
                             <a style={{cursor:'pointer'}}

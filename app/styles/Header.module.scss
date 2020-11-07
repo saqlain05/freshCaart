@@ -9,6 +9,7 @@
       background-color: transparent;
       margin:  0 .21rem;
       cursor: pointer;
+      outline-style: none;
     }
     
     .dropdown {
@@ -28,6 +29,8 @@
       // z-index: 5;
       padding-right: 2rem;
       right: 0;
+      // font-size: .8rem;
+      
 
 
 
@@ -42,6 +45,8 @@
       display: block;
       // margin-right: 2rem;
       background-color: #f1f1f1;
+      // border: 1px solid black;
+      font-size: .91rem;
     }
     
   //   .dropdownContent a:hover {background-color: #ddd;}
