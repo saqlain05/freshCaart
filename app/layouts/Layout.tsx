@@ -3,6 +3,7 @@ import { Head } from "blitz"
 import Header from "app/products/components/Header"
 import ItemContext, { ItemContextInterface } from "app/contexts/ItemContext"
 import ItemReducer from "app/reducers/ItemReducer"
+import DigitalRamaFooter from "app/products/components/DigitalRamaFooter"
 
 
 type LayoutProps = {
@@ -31,9 +32,11 @@ const Layout = ({ title, children }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ItemContext.Provider value={{...contextValues, show, setShow, grandQty, setGrandQty, grandAmount, setGrandAmount}}> 
-        <Suspense fallback="...."><Header /> <br /> <br /> <br /> <br /> <br/></Suspense>
+        <Suspense fallback="...."><Header /> <br /> <br /> <br /> <br /> <br/>  </Suspense>
         {children}
+        {/* <DigitalRamaFooter /> */}
       </ItemContext.Provider>  
+      {/* <DigitalRamaFooter /> */}
     </>
   )
 }

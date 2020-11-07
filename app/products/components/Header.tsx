@@ -19,7 +19,7 @@ const Header = () => {
                </div>
                {user?
                <div className={styles.items}>
-                   <Link  href="products/cart">
+                   <Link  href="/products/cart">
                <a>
                <span> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
                </a>

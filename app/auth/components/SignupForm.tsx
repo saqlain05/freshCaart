@@ -3,7 +3,7 @@ import { LabeledTextField } from "app/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/components/Form"
 import signup from "app/auth/mutations/signup"
 import { SignupInput, SignupInputType } from "app/auth/validations"
-import styles from '../../styles/Login.module.scss'
+import styles from '../../styles/Signup.module.scss'
 import { Link } from "blitz"
 
 type SignupFormProps = {
@@ -13,10 +13,10 @@ type SignupFormProps = {
 export const SignupForm = (props: SignupFormProps) => {
   return (
     <div className={styles.mainDiv}>
-      <h1 className={styles.head}>Create an Account</h1>
+      <h3 className={styles.head}>Create an Account</h3>
 
       <Form<SignupInputType>
-        className={styles.form}
+        className={styles.formDiv}
         submitText="Create Account"
         schema={SignupInput}
         initialValues={{ email: "", password: "" }}
@@ -37,7 +37,10 @@ export const SignupForm = (props: SignupFormProps) => {
         <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" />
         <LabeledTextField className={styles.input} name="password" label="Password" placeholder="Password" type="password" />
       </Form>
-      <Link href="login"><a className={styles.anchor}>alreay have account?? Login</a></Link>
+      {/* <Link href="login"><a className={styles.anchor}>alreay have account?? Login</a></Link> */}
+      <div style={{ marginTop: "1rem" }} className={styles.linkDiv}>
+        Already Have account? <Link href="/login">Login</Link>
+      </div>
     </div>
   )
 }

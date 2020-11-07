@@ -28,9 +28,10 @@ const cart = () => {
             <Cart />
             <br/><br/>
             {empty && 
-                <EmptyCart />
+               <> <EmptyCart /> 
+               <hr style={{width:'85%', margin:'auto', marginTop:'1rem',marginBottom:'1rem'}} /> 
+               <Phone /></>
             }
-            <Phone />
             <br/>
             {show && 
                 <FooterCart />
