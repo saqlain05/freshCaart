@@ -3,6 +3,7 @@ import { useRouter, BlitzPage, GetServerSideProps } from "blitz"
 import Layout from "app/layouts/Layout"
 import { LoginForm } from "app/auth/components/LoginForm"
 import getCarts from "app/carts/queries/getCarts"
+import cookie from 'js-cookie'
 
 export const getServerSideProps: GetServerSideProps = async () =>  {
   const carts =  JSON.stringify(await getCarts({include: {product: true}}))
@@ -41,6 +42,7 @@ const LoginPage: BlitzPage = ({data}) => {
         basket.totalQty += list.quantity
       })
       window.localStorage.setItem('cart', JSON.stringify(basket))
+      cookie.set('token', user.id)
     }
     router.push('/products') 
   }
