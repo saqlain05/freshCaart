@@ -35,7 +35,7 @@ const FooterCart = () => {
                 })
                 console.log(insertCart)
             })
-            router.push('/')
+            router.push('/orders')
         } catch (error) {
             console.log(error)
         }

@@ -1,55 +1,32 @@
 import React, { Suspense } from "react"
 import Layout from "app/layouts/Layout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
-import getOrders from "app/orders/queries/getOrders"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, GetServerSideProps } from "blitz"
+import {parseCookies} from 'nookies'
+import cookie from 'js-cookie'
+import getProfile from "app/profiles/queries/getProfile"
+import PlaceOrder from "app/orders/components/PlaceOrder"
 
-const ITEMS_PER_PAGE = 100
+export const getServerSideProps:GetServerSideProps = async(ctx) => {
 
-export const OrdersList = () => {
-  const router = useRouter()
-  const page = Number(router.query.page) || 0
-  const [{ orders, hasMore }] = usePaginatedQuery(getOrders, {
-    orderBy: { id: "asc" },
-    skip: ITEMS_PER_PAGE * page,
-    take: ITEMS_PER_PAGE,
-  })
+  const {token} = parseCookies(ctx)
+  const data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
+  const profile = JSON.parse(data)
 
-  const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
-  const goToNextPage = () => router.push({ query: { page: page + 1 } })
-
-  return (
-    <div>
-      <ul>
-        {orders.map((order) => (
-          <li key={order.id}>
-            <Link href="/orders/[orderId]" as={`/orders/${order.id}`}>
-              <a>{order.name}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
-    </div>
-  )
+  return {
+    props: {
+      userId: Number(token),
+      profile
+    }
+  }
 }
 
-const OrdersPage: BlitzPage = () => {
+const OrdersPage: BlitzPage = ({userId, profile}) => {
   return (
     <div>
-      <p>
-        <Link href="/orders/new">
-          <a>Create Order</a>
-        </Link>
-      </p>
+      <h1>Show profile here...</h1>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <OrdersList />
+        <PlaceOrder profile={profile} userId={userId}/>
       </Suspense>
     </div>
   )
