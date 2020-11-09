@@ -1,19 +1,19 @@
 import { Ctx } from "blitz"
 import db, { FindManyOrderArgs } from "db"
+import OrderDetails from "../components/OrderDetails"
 
-type GetOrdersInput = Pick<FindManyOrderArgs, "where" | "orderBy" | "skip" | "take">
+type GetOrdersInput = Pick<FindManyOrderArgs, "where" | "orderBy" | "skip" | "take" | "include">
 
 export default async function getOrders(
-  { where, orderBy, skip = 0, take }: GetOrdersInput,
-  ctx: Ctx
+  { where, orderBy, skip = 0, take, include }: GetOrdersInput,
 ) {
-  ctx.session.authorize()
 
   const orders = await db.order.findMany({
     where,
     orderBy,
     take,
     skip,
+    include
   })
 
   const count = await db.order.count()
@@ -25,5 +25,6 @@ export default async function getOrders(
     nextPage,
     hasMore,
     count,
+    include
   }
 }
