@@ -1,10 +1,30 @@
 import React, { Suspense } from "react"
 import Layout from "app/layouts/Layout"
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from "blitz"
-import getProfiles from "app/profiles/queries/getProfiles"
+import { Link, usePaginatedQuery, useRouter, BlitzPage, GetServerSideProps } from "blitz"
 import Profile from "app/profiles/components/Profile"
+import { parseCookies } from "nookies"
 
-const ITEMS_PER_PAGE = 100
+export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+
+  const {token} = parseCookies(ctx)
+  if(!token) {
+    console.log('Here')
+    const {res} = ctx
+    res.writeHead(302, {Location: '/login'})
+    res.end()
+    return {
+      props: {
+        data: JSON.stringify(res)
+      }
+    }
+  }
+  return {
+    props: {
+      data : true
+    }
+  }
+}  
+
 
 export const ProfilesList = () => {
   const router = useRouter()

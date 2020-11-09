@@ -6,14 +6,29 @@ import FooterPrice from "app/products/components/FooterPrice"
 import ItemContext from "app/contexts/ItemContext"
 import getCarts from "app/carts/queries/getCarts"
 import Loader from "app/products/components/Loader"
+import { parseCookies } from "nookies"
 
-export const getServerSideProps: GetServerSideProps = async () =>  {
-  const carts =  JSON.stringify(await getCarts({include: {product: true}}))
-  const data = JSON.parse(carts)
-  console.log(data)
-  return {
-    props: {
-      data
+export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+  const {token} = parseCookies(ctx)
+  if(!token) {
+    console.log('Here')
+    const {res} = ctx
+    res.writeHead(302, {Location: '/login'})
+    res.end()    
+    return {
+      props: {
+        data: JSON.stringify(res)
+      }
+    }
+  }
+  else {
+    const carts =  JSON.stringify(await getCarts({include: {product: true}}))
+    const data = JSON.parse(carts)
+    console.log(data)
+    return {
+      props: {
+        data
+      }
     }
   }
 }
