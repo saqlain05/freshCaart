@@ -10,6 +10,19 @@ import Loader from "app/products/components/Loader"
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
   const {token} = parseCookies(ctx)
+
+  if(!token) {
+    console.log('Here')
+    const {res} = ctx
+    res.writeHead(302, {Location: '/login'})
+    res.end()
+    return {
+      props: {
+        data: JSON.stringify(res)
+      }
+    }
+  }
+
   const data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
   if (JSON.parse(data) !== null)
     profile = JSON.parse(data)

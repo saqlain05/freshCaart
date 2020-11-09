@@ -5,7 +5,25 @@ import FooterCart from 'app/products/components/FooterCart'
 import EmptyCart from 'app/products/components/EmptyCart'
 import Phone from 'app/products/components/Phone'
 import ItemContext from 'app/contexts/ItemContext'
+import { GetServerSideProps } from 'blitz'
+import { parseCookies } from 'nookies'
 
+export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+    const {token} = parseCookies(ctx)
+    if(!token) {
+      console.log('Here')
+      const {res} = ctx
+      res.writeHead(302, {Location: '/login'})
+      res.end()
+    }
+
+    return {
+        props: {
+            data : true
+        }
+    }
+}
+    
 const cart = () => {
 
     const {show, setShow} = useContext(ItemContext)
