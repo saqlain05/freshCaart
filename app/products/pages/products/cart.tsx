@@ -10,12 +10,23 @@ import { parseCookies } from 'nookies'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
     const {token} = parseCookies(ctx)
+    const {verified} = parseCookies(ctx)
     if(!token) {
       console.log('Here')
       const {res} = ctx
       res.writeHead(302, {Location: '/login'})
       res.end()
     }
+    else if(verified === 'false') {
+        const {res} = ctx
+        res.writeHead(302, {Location: '/notVerified'})
+        res.end()    
+        return {
+          props: {
+            data: JSON.stringify(res)
+          }
+        }
+      }
 
     return {
         props: {

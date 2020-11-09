@@ -11,12 +11,24 @@ import Phone from "app/products/components/Phone"
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
   const {token} = parseCookies(ctx)
+  const {verified} = parseCookies(ctx)
 
   if(!token) {
     console.log('Here')
     const {res} = ctx
     res.writeHead(302, {Location: '/login'})
     res.end()
+    return {
+      props: {
+        data: JSON.stringify(res)
+      }
+    }
+  }
+
+  else if(verified === 'false') {
+    const {res} = ctx
+    res.writeHead(302, {Location: '/notVerified'})
+    res.end()    
     return {
       props: {
         data: JSON.stringify(res)

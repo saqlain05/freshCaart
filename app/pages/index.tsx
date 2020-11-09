@@ -10,6 +10,8 @@ const index = () => {
     const handleLogout = async () => {
       await logout()
       cookie.remove('token')
+      cookie.remove('verified')
+      cookie.remove('role')
       window.localStorage.removeItem('cart')
       window.localStorage.removeItem('flag')
     }

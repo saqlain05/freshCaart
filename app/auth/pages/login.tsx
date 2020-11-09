@@ -26,8 +26,11 @@ const LoginPage: BlitzPage = ({data}) => {
   }
 
   const handleLogin = (user) => {
+    console.log(user)
     window.localStorage.setItem('flag', 'false')
     cookie.set('token', user.id)
+    cookie.set('verified', user.verified)
+    cookie.set('role', user.role)
     const lists = data.carts.filter(cart => cart.userId === user.id)
     window.localStorage.setItem('cart', JSON.stringify(cartObject))
     const basket = JSON.parse(window.localStorage.getItem('cart'))
