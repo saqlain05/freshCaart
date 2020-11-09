@@ -72,8 +72,17 @@ const PlaceOrder = ({profile, userId}) => {
   }
   
   return (
-      <div>
-        <button onClick = {handleClick}>Place Order</button>
+      <div style={{width:'60%', margin:'auto'}}>
+        <button onClick = {handleClick} 
+        style={{width:'100%',
+        padding:'.51rem',
+        fontSize: '.94rem',
+        fontWeight:'800',
+        backgroundColor:'green',
+        color:'white',
+        border:'none',
+        cursor:'pointer'
+        }}>Place Order</button>
       </div>
   )
 }

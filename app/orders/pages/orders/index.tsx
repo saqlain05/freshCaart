@@ -6,6 +6,7 @@ import cookie from 'js-cookie'
 import getProfile from "app/profiles/queries/getProfile"
 import PlaceOrder from "app/orders/components/PlaceOrder"
 import Loader from "app/products/components/Loader"
+import Phone from "app/products/components/Phone"
 
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
@@ -26,6 +27,7 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
   const data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
   if (JSON.parse(data) !== null)
     profile = JSON.parse(data)
+    
 
   return {
     props: {
@@ -44,12 +46,24 @@ const OrdersPage: BlitzPage = ({userId, profile}) => {
       Router.push('/profiles')
     }
   })
-
+  
   return (
+    
     <div>
-      <h1>Show profile here...</h1>
+      
+     
+      
       <Suspense fallback={<div> <Loader /> </div>}>
+        <div style={{width:'75%', margin:'auto', marginTop:'10%'}}>
+        <h1 style={{margin: '1rem 0'}}> Order Details </h1>
+          <h2 style={{margin: '1rem 0', textTransform:'capitalize'}}><b>{profile.shopName} </b></h2>
+          <p style={{margin: '1rem 0'}}>{profile.address}, {profile.city} </p>
+          <p style={{margin: '1rem 0'}}>Payment Mode - <b>Cash On Delivary</b> (COD) </p>
+        </div>
+        
         <PlaceOrder profile={profile} userId={userId}/>
+        <hr style={{margin:'1rem 0 '}} />
+        <Phone />
       </Suspense>
     </div>
   )
