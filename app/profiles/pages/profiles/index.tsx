@@ -6,6 +6,7 @@ import { parseCookies } from "nookies"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
 
+  console.log(ctx.req.headers.referer)
   const {token} = parseCookies(ctx)
   if(!token) {
     console.log('Here')
@@ -20,13 +21,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
   }
   return {
     props: {
-      data : true
+      data : true,
+      url: ctx.req.headers.referer === undefined ? 'test' : ctx.req.headers.referer
     }
   }
 }  
 
 
-export const ProfilesList = () => {
+export const ProfilesList = ({url}) => {
+  console.log(url)
   const router = useRouter()
   // const [{ profiles, hasMore }] = usePaginatedQuery(getProfiles, {
   //   orderBy: { id: "asc" },
@@ -38,19 +41,20 @@ export const ProfilesList = () => {
   return (
     <div>
      
-    <Profile />
+    <Profile url={url}/>
      
     </div>
   )
 }
 
-const ProfilesPage: BlitzPage = () => {
+const ProfilesPage: BlitzPage = ({url}) => {
+  console.log(url)
   return (
     <div>
 
 
       <Suspense fallback={<div>Loading...</div>}>
-        <ProfilesList />
+        <ProfilesList url={url}/>
       </Suspense>
     </div>
   )

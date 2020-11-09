@@ -9,6 +9,7 @@ import Loader from "app/products/components/Loader"
 import { parseCookies } from "nookies"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+  console.log(ctx.req.headers.referer)
   const {token} = parseCookies(ctx)
   if(!token) {
     console.log('Here')
@@ -27,7 +28,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
     console.log(data)
     return {
       props: {
-        data
+        data,
+        url: ctx.req.headers.referer === undefined ? null : ctx.req.headers.referer
       }
     }
   }
@@ -35,7 +37,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
 
 
 export const ViewCart = ({data}) => {
-  
   return (
     <> 
       <ProductList data={data}/>
