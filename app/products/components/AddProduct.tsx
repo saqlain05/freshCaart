@@ -3,48 +3,32 @@ import styles from '../../styles/AddProduct.module.scss'
 import {Form , Field} from 'react-final-form'
 import { Router, useMutation } from 'blitz'
 import upsertProduct from '../mutations/upsertProduct'
+import createProduct from '../mutations/createProduct'
 
 
 const AddProduct = () => {
 
-    // const [upsertProductMutation] = useMutation(upsertProduct)
+    const [createProductMutation] = useMutation(createProduct)
 
-    // const handleForm = async (formObj) => {
-    //     try {
-    //         const product = await upsertProductMutation({
-    //             where: {
-                    
-    //             },
-    //             update: {
-    //                 name: formObj.name,
-    //                 imageUrl: formObj.imageUrl,
-    //                 price: formObj.price,
-    //                 minQuantity: formObj.minQuantity,
-    //                 measureUnit: formObj.measureUnit,
-    //                 description: formObj.description,
-    //                 stock: formObj.stock,
-    //                 category : {connect : {id: formObj.categoryId}}
-                    
-                   
-    //             },
-    //             create: {
-                   
-    //                name: formObj.name,
-    //                imageUrl: formObj.imageUrl,
-    //                price: formObj.price,
-    //                minQuantity: formObj.minQuantity,
-    //                measureUnit: formObj.measureUnit,
-    //                description: formObj.description,
-    //                stock: formObj.stock,
-    //                category : {connect : {id: formObj.categoryId}}
-                   
-    //             }
-    //         })
-    //         Router.push('/products')
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const handleForm = async (formObj) => {
+        try {
+            const product = await createProductMutation({
+                data: {
+                   name: formObj.name,
+                   imageUrl: formObj.imageUrl,
+                   price: parseFloat(formObj.price),
+                   minQuantity: parseInt(formObj.minQuantity),
+                   measureUnit: formObj.measureUnit,
+                   description: formObj.description,
+                   stock: Boolean(formObj.stock),
+                   category : {connect : {id: parseInt(formObj.category)}}
+                }
+            }, {})
+            Router.push('/products')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className={styles.mainDiv}>
@@ -52,7 +36,7 @@ const AddProduct = () => {
             <Form onSubmit={(formObj)=>{
                 alert("submitting!");
                 console.log(formObj)
-                // handleForm(formObj)
+                handleForm(formObj)
             }}>
                 {({ handleSubmit })=>(
                     <form className={styles.formDiv} onSubmit={handleSubmit}>
@@ -66,7 +50,7 @@ const AddProduct = () => {
                                 <input placeholder="Enter Image URL" type="text" {...input} />
                             )}
                         </Field>
-                        <Field name="Price">
+                        <Field name="price">
                             {({input})=>(
                                 <input placeholder="Product Price" type="number" {...input} />
                             )}
@@ -85,7 +69,7 @@ const AddProduct = () => {
                         <Field name="measureUnit" component="select">
                              <option>Select Measure unit</option>
                              <option value="Kg">KG</option>
-                             <option value="Peace">Peace</option>
+                             <option value="Item">Item</option>
                         </Field>
 
                         <Field name="stock" component="select">
@@ -96,7 +80,7 @@ const AddProduct = () => {
                         <Field name="category" component="select">
                              <option>Select category</option>
                              <option value="1">Fruits</option>
-                             <option value="2">Vegitables</option>
+                             <option value="2">Vegetables</option>
                         </Field>
                        
 
