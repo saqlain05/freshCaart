@@ -5,6 +5,7 @@ import ProductList from "app/products/components/ProductList"
 import FooterPrice from "app/products/components/FooterPrice"
 import ItemContext from "app/contexts/ItemContext"
 import getCarts from "app/carts/queries/getCarts"
+import Loader from "app/products/components/Loader"
 
 export const getServerSideProps: GetServerSideProps = async () =>  {
   const carts =  JSON.stringify(await getCarts({include: {product: true}}))
@@ -31,7 +32,7 @@ const ProductsPage: BlitzPage = ({data}) => {
   const {show} = useContext(ItemContext)
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div> <Loader /> </div>}>
         <ViewCart data={data}/>
         {show && (
           <FooterPrice />

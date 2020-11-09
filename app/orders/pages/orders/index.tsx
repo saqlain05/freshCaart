@@ -5,6 +5,7 @@ import {parseCookies} from 'nookies'
 import cookie from 'js-cookie'
 import getProfile from "app/profiles/queries/getProfile"
 import PlaceOrder from "app/orders/components/PlaceOrder"
+import Loader from "app/products/components/Loader"
 
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
@@ -34,7 +35,7 @@ const OrdersPage: BlitzPage = ({userId, profile}) => {
   return (
     <div>
       <h1>Show profile here...</h1>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div> <Loader /> </div>}>
         <PlaceOrder profile={profile} userId={userId}/>
       </Suspense>
     </div>
