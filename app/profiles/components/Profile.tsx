@@ -4,8 +4,8 @@ import {Form , Field} from 'react-final-form'
 import { Router, useMutation, useSession } from 'blitz'
 import upsertProfile from '../mutations/upsertProfile'
 
-const Profile = () => {
-
+const Profile = ({url}) => {
+    console.log(url === 'http://localhost:3000/orders')
     const userId = useSession().userId
 
     const [upsertProfileMutation] = useMutation(upsertProfile)
@@ -44,6 +44,7 @@ const Profile = () => {
                    whatsapp: (formObj.whatsapp).toString()
                 }
             })
+            if(url === 'http://localhost:3000/orders') Router.back()
             Router.push('/products')
         } catch (error) {
             console.log(error)
