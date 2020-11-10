@@ -6,9 +6,11 @@ import { Link, Router, useMutation } from 'blitz';
 import logout from 'app/auth/mutations/logout';
 import { useCurrentUser } from 'app/hooks/useCurrentUser';
 import ItemContext from 'app/contexts/ItemContext';
+import { parseCookies } from 'nookies';
 
 const Header = () => {
     const user = useCurrentUser();
+    const {role} = parseCookies()
     const [logoutMutation] = useMutation(logout)
     const {grandQty} = useContext(ItemContext)
     return (
@@ -40,16 +42,19 @@ const Header = () => {
                             <Link href="/orders/orderhistory">
                             <a>OrderHistory</a>
                             </Link>
-                            
-                            <Link href="/products/admin/addPro">
-                            <a>Add Product</a>
-                            </Link>
-                            <Link href="/products/admin/manageUser">
-                            <a>ManageUser</a>
-                            </Link>
-                            <Link href="/orders/manageOrder">
-                            <a>ManageOrder</a>
-                            </Link>
+                            {role === 'admin' && (
+                                <>
+                                    <Link href="/products/admin/addPro">
+                                        <a>Add Product</a>
+                                    </Link>
+                                    <Link href="/products/admin/manageUser">
+                                        <a>ManageUser</a>
+                                    </Link>
+                                    <Link href="/orders/manageOrder">
+                                        <a>ManageOrder</a>
+                                    </Link>
+                                </>
+                            )}
                             {/* <a href="#">Logout</a> */}
 
                             <a style={{cursor:'pointer'}}

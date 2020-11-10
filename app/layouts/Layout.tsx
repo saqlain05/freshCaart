@@ -35,7 +35,7 @@ const Layout = ({ title, children }: LayoutProps) => {
       <ItemContext.Provider value={{...contextValues, show, setShow, grandQty, setGrandQty, grandAmount, setGrandAmount}}> 
         <Suspense fallback={<div> <Loader /> </div>}><Header /> <br /> <br /> <br /> <br /> <br/>  </Suspense>
         {children}
-        {/* <DigitalRamaFooter /> */}
+        <DigitalRamaFooter />
       </ItemContext.Provider>  
       {/* <DigitalRamaFooter /> */}
     </>
