@@ -9,6 +9,7 @@ const Profile = ({url}) => {
     const userId = useSession().userId
 
     const [upsertProfileMutation] = useMutation(upsertProfile)
+   
 
     const handleForm = async (formObj) => {
         try {
@@ -60,8 +61,8 @@ const Profile = ({url}) => {
             }}>
                 {({ handleSubmit })=>(
                     <form className={styles.formDiv} onSubmit={handleSubmit}>
-                        <Field name="firstName" >
-                            {({input})=>(
+                        <Field name="firstName">
+                            {({input})=>( 
                                 <input placeholder="First Name" type="text" {...input} />
                             )}
                         </Field>
@@ -117,7 +118,7 @@ const Profile = ({url}) => {
                             )}
                         </Field>
 
-                        <button type="submit">Update Profile</button>
+                        <button type="submit">Save Profile</button>
 
                     </form>
                 )}

@@ -7,6 +7,7 @@ import getProfile from "app/profiles/queries/getProfile"
 import PlaceOrder from "app/orders/components/PlaceOrder"
 import Loader from "app/products/components/Loader"
 import Phone from "app/products/components/Phone"
+import LoaderTwo from "app/products/components/LoaderTwo"
 
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
@@ -65,7 +66,7 @@ const OrdersPage: BlitzPage = ({userId, profile}) => {
       
      
       
-      <Suspense fallback={<div> <Loader /> </div>}>
+      <Suspense fallback={<div> <LoaderTwo /> </div>}>
         <div style={{width:'75%', margin:'auto', marginTop:'10%'}}>
         <h1 style={{margin: '1rem 0'}}> Order Details </h1>
           <h2 style={{margin: '1rem 0', textTransform:'capitalize'}}><b>{profile.shopName} </b></h2>

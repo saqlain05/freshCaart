@@ -1,6 +1,7 @@
 import Layout from 'app/layouts/Layout'
 import OrderHistory from 'app/orders/components/OrderHistory'
 import getOrders from 'app/orders/queries/getOrders'
+import Loader from 'app/products/components/Loader'
 import { GetServerSideProps } from 'blitz'
 import { parseCookies } from 'nookies'
 import React, { Suspense } from 'react'
@@ -42,10 +43,11 @@ export const  getServerSideProps:GetServerSideProps = async (ctx) => {
 
 const Orderhistory = ({orders}) => {
     console.log(orders)
+
     return (
         <div>
-            <Suspense fallback="loading">
-            <OrderHistory />
+            <Suspense fallback={<div> <Loader /> </div>}>
+            <OrderHistory  />
             </Suspense>
         </div>
     )

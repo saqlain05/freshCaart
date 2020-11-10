@@ -1,0 +1,42 @@
+.mainDiv{
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+}
+
+    .centerDiv{
+        width: 150px;
+        height: 150px;
+        position: relative;
+        // background-color: #fff;
+    }
+
+    .rot{
+        width: 150px;
+        height: 150px;
+        border-right: 3px solid green;
+        border-radius: 50%;
+        animation: rot 5s linear infinite;
+        position: absolute;
+    }
+    @keyframes rot{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+
+        .h1{
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            color: green;
+            font-size: .91rem;
+            text-align: center;
+        }
+    

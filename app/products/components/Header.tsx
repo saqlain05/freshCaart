@@ -21,9 +21,11 @@ const Header = () => {
                <div className={styles.items}>
                    <Link  href="/products/cart">
                <a>
-               <span> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
+               <span> <div className={styles.circle}>10</div> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
+               
                </a>
                </Link>
+               
                <div className={styles.dropdown} >
                     <button className={styles.dropbtn}><FontAwesomeIcon icon={faUserCircle} className={styles.ProfileIcons}  /></button>
                         <div  className={styles.dropdownContent}>
