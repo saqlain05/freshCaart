@@ -10,7 +10,7 @@ export default async function getOrders(
 
   const orders = await db.order.findMany({
     where,
-    orderBy : {updatedAt : 'desc' },
+    orderBy : {createdAt : 'desc' },
     take,
     skip,
     include
