@@ -7,6 +7,7 @@ import styles from '../../styles/Product.module.scss'
 import ChangeQty from './ChangeQty'
 
 const SingleProduct = ({product, cartList}) => {
+    const stock = product.stock;
     const [hide, setHide] = useState(false)
     const [qty, setQty] = useState(1)
     const [amt, setAmt] = useState(product.price)
@@ -127,12 +128,14 @@ const SingleProduct = ({product, cartList}) => {
                 <h5 className={styles.price}>{qty} <span className={styles.price2}>Kg</span></h5>
                 <h5 className={styles.price}>Rs <span className={styles.price2}>{amt}</span></h5>
                 </div>
-                <p className={styles.para}>(Minimum Order Quantity - <span className={styles.para2}>{product.minQuantity}</span> KG)</p>
+                <p className={styles.para}>(Minimum Order Quantity - <span className={styles.para2}>{product.minQuantity}</span> {product.measureUnit} )</p>
                 {(hide) ? (
                     <ChangeQty qty={qty} incrementValue={incrementValue} decrementValue={decrementValue} min={product.minQuantity}/>
-                ) : (
-                    <button className={styles.addToCart} onClick={addCart}>Add To Cart</button>
-                )}
+                ) : <div>
+                    {(stock)? <div> <button className={styles.addToCart} onClick={addCart}>Add To Cart</button> </div> : <div><b>OUT OF STOCK</b></div> }
+                    {/* // <button className={styles.addToCart} onClick={addCart}>Add To Cart</button> */}
+                   
+                </div>}
             </div>
         </div>
     )
