@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../../styles/OrderHistory.module.scss';
 
-const OrderHistory = () => {
+const OrderHistory = (props) => {
     return (
         <>
         <div className={styles.mainDiv}>
@@ -11,9 +11,11 @@ const OrderHistory = () => {
 
             <div className={styles.orders}>
             <div className={styles.title}>
-            <h2 className={styles.head1}>Order No.</h2>
+            <h2 className={styles.head1}>Order No.  </h2>
             <h2 className={styles.head1}>Order Date</h2>
+            <br/>
             <h2 className={styles.head1}>Order Amount</h2>
+            
             <h2 className={styles.head1}>Total Products</h2>
             </div>
             <div className={styles.titleBold}>

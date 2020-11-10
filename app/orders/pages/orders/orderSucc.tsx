@@ -7,10 +7,11 @@ const orderSucc:BlitzPage = () => {
         <div>
             <h2 style={{textAlign:'center', marginTop:'20%'}}>Your Order Is Successfull</h2>
             <h5 style={{textAlign:'center', margin:'1rem 0'}}>You will recieve your order on or Before
-            <br/> <b>28th Oct 2020 7:30 PM</b>
+            <br/> <span style={{color:'red'}}> <b>28th Oct 2020 7:30 PM</b></span>
             </h5>
             <h5 style={{textAlign:'center', margin:'1rem 0'}}>Your payment mode was 
-            <b> Cash On Delivary</b>
+            <span style={{color:'red'}}>
+            <b> Cash On Delivary</b></span>
             </h5>
             <div style={{ display:'grid', placeItems:'center', textAlign:'center'}}>
             <Link href="/orders/myorder">
