@@ -47,6 +47,9 @@ const Header = () => {
                             <Link href="/products/admin/manageUser">
                             <a>ManageUser</a>
                             </Link>
+                            <Link href="/orders/manageOrder">
+                            <a>ManageOrder</a>
+                            </Link>
                             {/* <a href="#">Logout</a> */}
 
                             <a style={{cursor:'pointer'}}
