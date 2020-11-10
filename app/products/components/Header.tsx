@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from '../../styles/Header.module.scss'
 import { faHome,faShoppingCart,faUser,faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Router, useMutation } from 'blitz';
 import logout from 'app/auth/mutations/logout';
 import { useCurrentUser } from 'app/hooks/useCurrentUser';
+import ItemContext from 'app/contexts/ItemContext';
 
 const Header = () => {
     const user = useCurrentUser();
     const [logoutMutation] = useMutation(logout)
+    const {grandQty} = useContext(ItemContext)
     return (
         <>
            <div className={styles.mainDiv}>
@@ -21,7 +23,7 @@ const Header = () => {
                <div className={styles.items}>
                    <Link  href="/products/cart">
                <a>
-               <span> <div className={styles.circle}>10</div> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
+               <span> <div className={styles.circle}>{grandQty}</div> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
                
                </a>
                </Link>

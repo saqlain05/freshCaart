@@ -34,7 +34,7 @@ const OrderHistory = ({orders}) => {
             <h2 className={styles.head2}> {orderss.totalPrice} INR</h2>
             {/* <h2 className={styles.head2}>1785 INR</h2> */}
             {/* <h2 className={styles.head2}>14 {orderss.address}</h2> */}
-            <h2 className={styles.head2}> check plz</h2>
+            <h2 className={styles.head2}>{orderss.totalQty}</h2>
             </div>
             <div className={styles.button}>
             <button className={styles.headPending}>{orderss.orderStatus}</button>

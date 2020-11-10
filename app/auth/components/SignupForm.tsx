@@ -19,10 +19,11 @@ export const SignupForm = (props: SignupFormProps) => {
         className={styles.formDiv}
         submitText="Create Account"
         schema={SignupInput}
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}
         onSubmit={async (values) => {
           try {
-            await signup({ email: values.email, password: values.password })
+            await signup({name: values.name, email: values.email, password: values.password })
+            alert('Please Login to continue')
             props.onSuccess && props.onSuccess()
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
@@ -34,7 +35,8 @@ export const SignupForm = (props: SignupFormProps) => {
           }
         }}
       >
-        <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" />
+        <LabeledTextField className={styles.input} name="name" label="Name" placeholder="Name" type="text" />
+        <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" type="email" />
         <LabeledTextField className={styles.input} name="password" label="Password" placeholder="Password" type="password" />
       </Form>
       {/* <Link href="login"><a className={styles.anchor}>alreay have account?? Login</a></Link> */}

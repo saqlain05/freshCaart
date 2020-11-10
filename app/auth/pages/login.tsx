@@ -48,6 +48,7 @@ const LoginPage: BlitzPage = ({data}) => {
       })
       window.localStorage.setItem('cart', JSON.stringify(basket))
     }
+    if(user.verified === false) router.push('/notVerified')
     router.push('/products') 
   }
 

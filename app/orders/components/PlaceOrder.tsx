@@ -25,7 +25,8 @@ const PlaceOrder = ({profile, userId}) => {
           phone: profile.phone,
           pinCode: profile.phone,
           totalPrice: basket.totalAmount,
-          payMode: "COD"
+          payMode: "COD",
+          totalQty: basket.totalQty
         }
       })
       console.log(order)
@@ -34,7 +35,7 @@ const PlaceOrder = ({profile, userId}) => {
         const orderDetail = await createOrderDetailMutation({
           data: {
             order: {connect: {id: order.id}},
-            goodsId: basket.cart[i].productId,
+            product: {connect: {id: basket.cart[i].productId}},
             productPrice: basket.cart[i].price,
             quantity: basket.cart[i].quantity
           }
