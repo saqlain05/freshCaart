@@ -25,7 +25,7 @@ const OrderHistory = ({orders}) => {
             </div>
             
                 <div className={styles.titleBold}>
-            <h2 className={styles.head2}>{orderss.id} </h2>
+            <h2 className={styles.head2}> 00{orderss.id} </h2>
             {/* <h2 className={styles.head2}>0015</h2> */}
            
             {/* <h2 className={styles.head2}>28 Oct 2020 10PM</h2> */}

@@ -125,7 +125,7 @@ const SingleProduct = ({product, cartList}) => {
             <div className={styles.items}>
                 <h2 className={styles.title}>{product.name}</h2>
                 <div className={styles.prices}>
-                <h5 className={styles.price}>{qty} <span className={styles.price2}>Kg</span></h5>
+                <h5 className={styles.price}>{qty} <span className={styles.price2}> {product.measureUnit} </span></h5>
                 <h5 className={styles.price}>Rs <span className={styles.price2}>{amt}</span></h5>
                 </div>
                 <p className={styles.para}>(Minimum Order Quantity - <span className={styles.para2}>{product.minQuantity}</span> {product.measureUnit} )</p>
