@@ -75,6 +75,8 @@
   }
   .items{
       margin-right: 5rem;
+      a{text-decoration:none;}
+      
 
         .ProfileIcons{
           // height: 8vh;
@@ -96,6 +98,7 @@
           font-size: .8rem;
           background-color: #17B871;
           color: white;
+          
         }
     }
     .user{

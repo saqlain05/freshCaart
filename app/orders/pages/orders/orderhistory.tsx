@@ -47,7 +47,7 @@ const Orderhistory = ({orders}) => {
     return (
         <div>
             <Suspense fallback={<div> <Loader /> </div>}>
-            <OrderHistory  />
+            <OrderHistory orders={orders}  />
             </Suspense>
         </div>
     )
