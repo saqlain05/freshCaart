@@ -38,6 +38,13 @@ const Header = () => {
                             <Link href="/orders/orderhistory">
                             <a>OrderHistory</a>
                             </Link>
+                            
+                            <Link href="/products/admin/addPro">
+                            <a>Add Product</a>
+                            </Link>
+                            <Link href="/products/admin/manageUser">
+                            <a>ManageUser</a>
+                            </Link>
                             {/* <a href="#">Logout</a> */}
 
                             <a style={{cursor:'pointer'}}

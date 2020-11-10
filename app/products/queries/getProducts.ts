@@ -11,7 +11,7 @@ export default async function getProducts(
 
   const products = await db.product.findMany({
     where,
-    orderBy,
+    orderBy : {updatedAt : 'desc' },
     take,
     skip,
   })
