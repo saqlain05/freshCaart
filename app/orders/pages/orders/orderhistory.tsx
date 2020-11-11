@@ -31,11 +31,11 @@ export const  getServerSideProps:GetServerSideProps = async (ctx) => {
         }
     }
     else {
-        const orders = await getOrders({where: {userId: Number(token)}, include: {orderDetails: true}})
+        const orders = await getOrders({where: {userId: Number(token)}, include: {orderDetails: {include: {product: true}}}})
         const data = JSON.stringify(orders.orders)
         return {
             props: {
-                orders : JSON.parse(data)
+              orders : JSON.parse(data)
             }
         }
     }
@@ -47,7 +47,7 @@ const Orderhistory = ({orders}) => {
     return (
         <div>
             <Suspense fallback={<div> <Loader /> </div>}>
-            <OrderHistory orders={orders}  />
+              <OrderHistory orders={orders}  />
             </Suspense>
         </div>
     )
