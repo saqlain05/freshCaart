@@ -10,8 +10,7 @@ type Action =
   | {type: "ADD_OBJECT"; localObject: object}
   | {type: "REMOVE_OBJECT"; id: number}  
 
-let List:Array<Object> = []
-let value:number = 0
+let List
 
 export default (state: State, action: Action) => {
     console.log(action.type)
@@ -33,7 +32,7 @@ export default (state: State, action: Action) => {
 }
 
 const handleIncrement = (payload:number, id:number) => {
-    const cart = JSON.parse(window.localStorage.getItem('cart'))
+    const cart = JSON.parse(window.localStorage.getItem('cart') || '{}')
     cart.cart.forEach(cart => {
         if(cart.productId === id) {
             console.log(cart.quantity)
@@ -49,7 +48,7 @@ const handleIncrement = (payload:number, id:number) => {
 
 const handleDecrement = (payload:number, id:number) => {
     console.log(payload)
-    const cart = JSON.parse(window.localStorage.getItem('cart'))
+    const cart = JSON.parse(window.localStorage.getItem('cart') || '{}')
     cart.cart.forEach(cart => {
         if(cart.productId === id) {
             cart.quantity--
@@ -61,10 +60,10 @@ const handleDecrement = (payload:number, id:number) => {
     window.localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-const addObject = (value: object, type) => {
+const addObject = (value, type) => {
     console.log(value, type)
     let flag = false
-    List =  JSON.parse(window.localStorage.getItem('cart'))
+    List =  JSON.parse(window.localStorage.getItem('cart') || '{}')
     console.log(List)
     if(List.cart.length === 0) {
         List.cart.push(value)
@@ -87,7 +86,7 @@ const addObject = (value: object, type) => {
 }
 
 const deleteObject = (id: number) => {
-    List =  JSON.parse(window.localStorage.getItem('testCart'))
+    List =  JSON.parse(window.localStorage.getItem('testCart') || '{}')
     List.cart.filter(list => list.productId !== id)
     window.localStorage.setItem('testCart', JSON.stringify(List))
 }

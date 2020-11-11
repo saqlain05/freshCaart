@@ -7,7 +7,6 @@ export default async function getOrderDetails(
   { where, orderBy, skip = 0, take }: GetOrderDetailsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
 
   const orderDetails = await db.orderDetail.findMany({
     where,

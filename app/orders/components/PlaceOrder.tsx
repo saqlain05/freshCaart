@@ -7,6 +7,7 @@ import createOrder from '../mutations/createOrder'
 import updateOrder from '../mutations/updateOrder'
 
 const PlaceOrder = ({profile, userId}) => {
+  
   console.log(userId, profile)
   const [createOrderMutation] = useMutation(createOrder)
   const [createOrderDetailMutation] = useMutation(createOrderDetail)
@@ -14,12 +15,12 @@ const PlaceOrder = ({profile, userId}) => {
   const [updateOrderMutation] = useMutation(updateOrder)
 
   const handleClick = async () => {
-    let order = {}
-    const basket = JSON.parse(window.localStorage.getItem('cart'))
+    let orders
+    const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
     try {
-      order = await createOrderMutation({
+      orders = await createOrderMutation({
         data: {
-          user: {connect: {id: userId}},
+          user: {connect: {id: parseInt(userId)}},
           address: profile.address,
           city: profile.city,
           phone: profile.phone,
@@ -29,12 +30,12 @@ const PlaceOrder = ({profile, userId}) => {
           totalQty: basket.totalQty
         }
       })
-      console.log(order)
+      console.log(orders)
 
       for(let i=0 ; i < basket.cart.length; i++) {
         const orderDetail = await createOrderDetailMutation({
           data: {
-            order: {connect: {id: order.id}},
+            order: {connect: {id: orders.id}},
             product: {connect: {id: basket.cart[i].productId}},
             productPrice: basket.cart[i].price,
             quantity: basket.cart[i].quantity
@@ -44,7 +45,7 @@ const PlaceOrder = ({profile, userId}) => {
       }
 
       const updated = await updateOrderMutation({
-        where: {id: order.id},
+        where: {id: orders.id},
         data: {
           payStatus: "PENDING",
           orderStatus: "PENDING"
@@ -53,7 +54,7 @@ const PlaceOrder = ({profile, userId}) => {
 
       for(let i = 0; i < basket.cart.length; i++) {
         const cart = await deleteCartMutation({
-          where: {userId_productId: {userId: userId, productId: basket.cart[i].productId}}
+          where: {userId_productId: {userId: parseInt(userId), productId: basket.cart[i].productId}}
         })
       }
       emptyStorage()
@@ -78,7 +79,7 @@ const PlaceOrder = ({profile, userId}) => {
         style={{width:'100%',
         padding:'.51rem',
         fontSize: '.94rem',
-        fontWeight:'800',
+        fontWeight:800,
         backgroundColor:'green',
         color:'white',
         border:'none',

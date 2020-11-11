@@ -8,11 +8,11 @@ const ITEMS_PER_PAGE = 100
 export const ProfilesList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ profiles, hasMore }] = usePaginatedQuery(getProfiles, {
-    orderBy: { id: "asc" },
-    skip: ITEMS_PER_PAGE * page,
-    take: ITEMS_PER_PAGE,
-  })
+  // const [{ profiles, hasMore }] = usePaginatedQuery(getProfiles, {
+  //   orderBy: { id: "asc" },
+  //   skip: ITEMS_PER_PAGE * page,
+  //   take: ITEMS_PER_PAGE,
+  // })
 
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
@@ -20,21 +20,21 @@ export const ProfilesList = () => {
   return (
     <div>
       <ul>
-        {profiles.map((profile) => (
+        {/* {profiles.map((profile) => (
           <li key={profile.id}>
             <Link href="/profiles/[profileId]" as={`/profiles/${profile.id}`}>
               <a>{profile.name}</a>
             </Link>
           </li>
-        ))}
+        ))} */}
       </ul>
 
       <button disabled={page === 0} onClick={goToPreviousPage}>
         Previous
       </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
+      {/* <button disabled={!hasMore} onClick={goToNextPage}>
         Next
-      </button>
+      </button> */}
     </div>
   )
 }

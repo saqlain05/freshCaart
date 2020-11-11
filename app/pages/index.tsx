@@ -6,20 +6,24 @@ import cookie from 'js-cookie'
 import styles from '../styles/FrontPage.module.scss'
 import DigitalRamaFooter from 'app/products/components/DigitalRamaFooter'
 
+let value
+
 const index = () => {
   useEffect(() => {
     const handleLogout = async () => {
-      await logout()
+      await logout(null)
       cookie.remove('token')
       cookie.remove('verified')
       cookie.remove('role')
       window.localStorage.removeItem('cart')
       window.localStorage.removeItem('flag')
     }
-    let value = JSON.parse(window.localStorage.getItem('flag'))
-    if(value === null) value = 0
-    if(value.toString() === 'true'){
-      handleLogout()
+    if(localStorage.getItem('flag') !== null){
+      value = JSON.parse(window.localStorage.getItem('flag') || '')
+      if(value === null) value = false 
+      if(value.toString() === 'true'){
+        handleLogout()
+      }
     }
   }, [])
   return (

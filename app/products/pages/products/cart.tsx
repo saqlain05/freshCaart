@@ -37,17 +37,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
     
 const cart = () => {
 
-    const {show, setShow} = useContext(ItemContext)
+    const test = useContext(ItemContext)
     const [empty, setEmpty] = useState(true)
 
     useEffect(() => {
-       const basket = JSON.parse(window.localStorage.getItem('cart'))
+       const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
        if(basket.cart.length > 0) {
-           setShow(true)
+           test?.setShow(true)
            setEmpty(false)
        }
        else {
-           setShow(false)
+           test?.setShow(false)
            setEmpty(true)
         }
     }, [])
@@ -62,7 +62,7 @@ const cart = () => {
                <Phone /></>
             }
             <br/>
-            {show && 
+            {test?.show && 
                 <FooterCart />
             }
         </div>

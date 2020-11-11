@@ -39,10 +39,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
     }
 }    
 
-const ManageOrder:BlitzPage = ({orders}) => {
+const ManageOrder:BlitzPage = (props) => {
+    let orders2
+    orders2 = props
     return (
         <div>
-            <AllOrders orders={orders}/>
+            <AllOrders orders={orders2.orders}/>
         </div>
     )
 }

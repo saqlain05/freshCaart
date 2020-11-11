@@ -16,9 +16,9 @@ const NewProfilePage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async () => {
           try {
-            const profile = await createProfileMutation({ data: { name: "MyName" } })
-            alert("Success!" + JSON.stringify(profile))
-            router.push("/profiles/[profileId]", `/profiles/${profile.id}`)
+            // const profile = await createProfileMutation({ data: { name: "MyName" } })
+            // alert("Success!" + JSON.stringify(profile))
+            // router.push("/profiles/[profileId]", `/profiles/${profile.id}`)
           } catch (error) {
             alert("Error creating profile " + JSON.stringify(error, null, 2))
           }

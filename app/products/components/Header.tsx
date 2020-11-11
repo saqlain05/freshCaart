@@ -12,7 +12,7 @@ const Header = () => {
     const user = useCurrentUser();
     const {role} = parseCookies()
     const [logoutMutation] = useMutation(logout)
-    const {grandQty} = useContext(ItemContext)
+    const test = useContext(ItemContext)
     return (
         <>
            <div className={styles.mainDiv}>
@@ -25,7 +25,7 @@ const Header = () => {
                <div className={styles.items}>
                    <Link  href="/products/cart">
                <a>
-               <span> <div className={styles.circle}>{grandQty}</div> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
+               <span> <div className={styles.circle}>{test?.grandQty}</div> <FontAwesomeIcon icon={faShoppingCart} className={styles.ProfileIcons} /></span>
                
                </a>
                </Link>

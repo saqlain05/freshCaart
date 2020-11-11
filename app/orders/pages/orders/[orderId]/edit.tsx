@@ -20,13 +20,13 @@ export const EditOrder = () => {
         initialValues={order}
         onSubmit={async () => {
           try {
-            const updated = await updateOrderMutation({
-              where: { id: order.id },
-              data: { name: "MyNewName" },
-            })
-            await mutate(updated)
-            alert("Success!" + JSON.stringify(updated))
-            router.push("/orders/[orderId]", `/orders/${updated.id}`)
+            // const updated = await updateOrderMutation({
+            //   where: { id: order.id },
+            //   data: { name: "MyNewName" },
+            // })
+            // await mutate(updated)
+            // alert("Success!" + JSON.stringify(updated))
+            // router.push("/orders/[orderId]", `/orders/${updated.id}`)
           } catch (error) {
             console.log(error)
             alert("Error creating order " + JSON.stringify(error, null, 2))

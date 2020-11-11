@@ -17,12 +17,12 @@ const SingleProduct = ({product, cartList}) => {
     const [qty, setQty] = useState(1)
     const [amt, setAmt] = useState(product.price)
     const [testId, setTestId] = useState(-1)
-    const {setShow, setGrandAmount, setGrandQty, grandAmount, grandQty} = useContext(ItemContext)
+    const test = useContext(ItemContext)
     const [deleteCartMutation] = useMutation(deleteCart)
 
     useEffect(() => {
-        const basket = JSON.parse(window.localStorage.getItem('cart'))
-        if(basket.cart.length > 0) setShow(true)
+        const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
+        if(basket.cart.length > 0) test?.setShow(true)
         basket.cart.forEach(cart => {
             if (cart.productId === product.id) {
                 setHide(true)
@@ -30,14 +30,14 @@ const SingleProduct = ({product, cartList}) => {
                 setAmt(cart.price)
             }
         })
-        setGrandQty(basket.totalQty)
-        setGrandAmount(basket.totalAmount)
+        test?.setGrandQty(basket.totalQty)
+        test?.setGrandAmount(basket.totalAmount)
     }, [])    
 
     const incrementValue = () => {
        setQty(qty + 1)
        setAmt((qty + 1) * product.price)
-       const bakset = JSON.parse(window.localStorage.getItem('cart'))
+       const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
        bakset.cart.forEach(cart => {
            if(cart.productId === product.id) {
                 ++cart.quantity
@@ -47,8 +47,8 @@ const SingleProduct = ({product, cartList}) => {
        ++bakset.totalQty
        bakset.totalAmount += product.price
        window.localStorage.setItem('cart', JSON.stringify(bakset))
-       setGrandQty(grandQty + 1)
-       setGrandAmount(grandAmount + product.price)
+       test?.setGrandQty(test?.grandQty + 1)
+       test?.setGrandAmount(test?.grandAmount + product.price)
     }
 
     const decrementValue = async () => {
@@ -59,19 +59,19 @@ const SingleProduct = ({product, cartList}) => {
         setQty(1)
         setAmt(product.price)
         setTestId(-1)
-        const bakset = JSON.parse(window.localStorage.getItem('cart'))
+        const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
         bakset.cart.forEach(list => {
             if(list.productId === product.id) {
                 bakset.totalQty -= product.minQuantity
                 bakset.totalAmount -= (product.price * product.minQuantity)
-                setGrandQty(bakset.totalQty)
-                setGrandAmount(bakset.totalAmount)
+                test?.setGrandQty(bakset.totalQty)
+                test?.setGrandAmount(bakset.totalAmount)
             }
         })
         console.log(product.id)
         bakset.cart = bakset.cart.filter(list => {return list.productId !== product.id})
         console.log(bakset)
-        if(bakset.cart.length === 0) setShow(false)
+        if(bakset.cart.length === 0) test?.setShow(false)
         window.localStorage.setItem('cart', JSON.stringify(bakset))
         if(cartList.length > 0) {
             try {
@@ -87,7 +87,7 @@ const SingleProduct = ({product, cartList}) => {
        } else {
            setQty(qty - 1)
            setAmt((qty - 1) * product.price)
-           const bakset = JSON.parse(window.localStorage.getItem('cart'))
+           const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
            bakset.cart.forEach(carts => {
                if(carts.productId === product.id) {
                     --carts.quantity
@@ -97,8 +97,8 @@ const SingleProduct = ({product, cartList}) => {
            --bakset.totalQty
            bakset.totalAmount -= product.price
            window.localStorage.setItem('cart', JSON.stringify(bakset))
-           setGrandQty(grandQty - 1)
-           setGrandAmount(grandAmount - product.price)
+           test?.setGrandQty(test?.grandQty - 1)
+           test?.setGrandAmount(test?.grandAmount - product.price)
         } 
     }
 
@@ -112,14 +112,14 @@ const SingleProduct = ({product, cartList}) => {
             name: product.name,
             price: product.price * product.minQuantity
         }
-        const basket = JSON.parse(window.localStorage.getItem('cart'))
+        const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
         basket.cart.push(newObject)
         basket.totalQty += product.minQuantity
         basket.totalAmount += product.price * product.minQuantity 
         window.localStorage.setItem('cart', JSON.stringify(basket))
-        setGrandQty(grandQty + product.minQuantity)
-        setGrandAmount(grandAmount + (product.minQuantity * product.price))
-        setShow(true)
+        test?.setGrandQty(test?.grandQty + product.minQuantity)
+        test?.setGrandAmount(test?.grandAmount + (product.minQuantity * product.price))
+        test?.setShow(true)
     }
 
     return (

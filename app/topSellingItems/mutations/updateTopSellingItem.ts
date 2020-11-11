@@ -7,7 +7,6 @@ export default async function updateTopSellingItem(
   { where, data }: UpdateTopSellingItemInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
 
   const topSellingItem = await db.topSellingItem.update({ where, data })
 
