@@ -15,7 +15,8 @@ const Profile = ({url}) => {
         try {
             const profile = await upsertProfileMutation({
                 where: {
-                    userId: userId
+                    userId: userId,
+                    // id: post.id
                 },
                 update: {
                     address: formObj.address,
@@ -59,7 +60,7 @@ const Profile = ({url}) => {
                 alert("submitting!");
                 handleForm(formObj)
             }}>
-                {({ handleSubmit })=>(
+                {({ handleSubmit, submitting, pristine })=>(
                     <form className={styles.formDiv} onSubmit={handleSubmit}>
                         <Field name="firstName">
                             {({input})=>( 
@@ -118,7 +119,7 @@ const Profile = ({url}) => {
                             )}
                         </Field>
 
-                        <button type="submit">Save Profile</button>
+                        <button type="submit" disabled={submitting || pristine}>Save Profile</button>
 
                     </form>
                 )}

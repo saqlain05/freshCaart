@@ -33,7 +33,7 @@ const Header = () => {
                <div className={styles.dropdown} >
                     <button className={styles.dropbtn}><FontAwesomeIcon icon={faUserCircle} className={styles.ProfileIcons}  /></button>
                         <div  className={styles.dropdownContent}>
-                            <Link href="/profiles">
+                            <Link href="/profiles/profile">
                             <a>Profile</a>
                             </Link>
                             <Link href="/orders/myorder">
@@ -53,6 +53,7 @@ const Header = () => {
                                     <Link href="/orders/manageOrder">
                                         <a>ManageOrder</a>
                                     </Link>
+                                    
                                 </>
                             )}
                             {/* <a href="#">Logout</a> */}

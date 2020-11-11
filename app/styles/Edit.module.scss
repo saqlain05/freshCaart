@@ -1,0 +1,100 @@
+.mainDiv{
+
+    $backgroundColor: #fff;
+    $title: black;
+    $span : #007E3E;
+    $button : #45F39B;
+    
+    width: 35%;
+    // height: 75vh;
+    margin: auto;
+    // border: 1px sienna solid;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 8px 0 rgba( #005E2E, 0.3), 0 6px 20px 0 rgba( #005E2E, 0.29);
+
+    h3{
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $span;
+        width: 120%;
+        margin-left: -2.8rem;
+        background-color: rgba($button, .3);
+        border-radius: 20px;
+        padding: .2rem 0;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 8px 0 rgba( #005E2E, 0.3), 0 6px 20px 0 rgba( #005E2E, 0.29);
+    }
+    .formDiv{
+        // margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        width: 99%;
+        margin: auto;
+        
+
+        .select, input{
+            height: 2rem;
+            margin: .2rem 0;
+            border: none;
+            outline-style: none;
+            border-bottom: .1rem solid $span;
+            background-color: transparent;
+            color: $span;
+            padding-left: .5rem;
+            font-weight: 550;
+            border-radius: 05px;
+            width: 100%;
+        }
+        label{
+            margin-top: .5rem;
+            margin-left: .5rem;
+            color: green;
+            font-size: .8rem;
+        }
+        ::placeholder{
+            color: $span;
+        }
+
+        button{
+            background-color: $button;
+            color: $title;
+            padding: .3rem 0;
+            margin-top: 1rem;
+            border: 1px solid $span;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            outline-style: none;
+            box-shadow: 0 4px 8px 0 rgba( #005E2E, 0.1), 0 6px 20px 0 rgba( #005E2E, 0.09);
+            transition: all .1s ease-in-out;
+        }
+
+        button:hover{
+            background-color: #005E2E;
+            color: white;
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px 0 rgba( #19804a, 0.3), 0 6px 20px 0 rgba( #19804a, 0.29);
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .mainDiv{
+width: 90%;
+    h3{
+        margin-left: -1.8rem;
+    }
+        .formDiv{
+
+            input{
+                margin: .5rem 0;
+            }
+
+        }
+    }
+}
+

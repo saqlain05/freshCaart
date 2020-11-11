@@ -1,12 +1,17 @@
 import deleteCart from 'app/carts/mutations/deleteCart'
 import getCarts from 'app/carts/queries/getCarts'
 import ItemContext from 'app/contexts/ItemContext'
-import { useMutation, useQuery } from 'blitz'
+import { Link, useMutation, useQuery } from 'blitz'
+import { parseCookies } from 'nookies'
 import React, { useContext, useEffect, useState } from 'react'
 import styles from '../../styles/Product.module.scss'
+import deleteProduct from '../mutations/deleteProduct'
 import ChangeQty from './ChangeQty'
+import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SingleProduct = ({product, cartList}) => {
+    const {role} = parseCookies()
     const stock = product.stock;
     const [hide, setHide] = useState(false)
     const [qty, setQty] = useState(1)
@@ -118,15 +123,40 @@ const SingleProduct = ({product, cartList}) => {
     }
 
     return (
+        <>
+        
+        
         <div className={styles.maindiv} key={product.id}>
+            {/* <Link href="/products/[productId]/edit" as={`/products/${product.id}/edit`}><a >eiit</a></Link> */}
+
             <div className={styles.images}>
+            <div className={styles.edit}>
+        {role ==='admin' ? <div className={styles.edit}>
+        <Link href="/products/[productId]/edit" as={`/products/${product.id}/edit`}><a ><FontAwesomeIcon icon={faPen} /> </a></Link>
+        <button style={{background:'transparent', color: 'red'}}
+            className="delete"
+            type="button"
+            onClick={async () => {
+                if (window.confirm("This will be deleted")) {
+                    await deleteProduct({ where: { id: product.id } })
+                    // router.push("/author")
+                }
+            }}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+        </button> 
+        </div>
+        :''}
+      
+        </div>
                 <img className={styles.image} src={product.imageUrl} alt="product image not found"/>
+               
             </div>
             <div className={styles.items}>
                 <h2 className={styles.title}>{product.name}</h2>
                 <div className={styles.prices}>
                 <h5 className={styles.price}>{qty} <span className={styles.price2}> {product.measureUnit} </span></h5>
                 <h5 className={styles.price}>Rs <span className={styles.price2}>{amt}</span></h5>
+                
                 </div>
                 <p className={styles.para}>(Minimum Order Quantity - <span className={styles.para2}>{product.minQuantity}</span> {product.measureUnit} )</p>
                 {(hide) ? (
@@ -136,8 +166,10 @@ const SingleProduct = ({product, cartList}) => {
                     {/* // <button className={styles.addToCart} onClick={addCart}>Add To Cart</button> */}
                    
                 </div>}
+                
             </div>
         </div>
+        </>
     )
 }
 
