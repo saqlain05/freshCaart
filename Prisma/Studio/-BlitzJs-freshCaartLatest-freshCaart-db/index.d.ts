@@ -591,6 +591,7 @@ export declare const OrderDistinctFieldEnum: {
   address: 'address',
   pinCode: 'pinCode',
   city: 'city',
+  totalQty: 'totalQty',
   userId: 'userId',
   totalPrice: 'totalPrice',
   payMode: 'payMode',
@@ -2924,11 +2925,13 @@ export type ProductSelect = {
   category?: boolean | CategoryArgs
   categoryId?: boolean
   cart?: boolean | FindManyCartArgs
+  orderDetails?: boolean | FindManyOrderDetailArgs
 }
 
 export type ProductInclude = {
   category?: boolean | CategoryArgs
   cart?: boolean | FindManyCartArgs
+  orderDetails?: boolean | FindManyOrderDetailArgs
 }
 
 export type ProductGetPayload<
@@ -2945,7 +2948,9 @@ export type ProductGetPayload<
       P extends 'category'
       ? CategoryGetPayload<S['include'][P]> :
       P extends 'cart'
-      ? Array<CartGetPayload<S['include'][P]>> : never
+      ? Array<CartGetPayload<S['include'][P]>> :
+      P extends 'orderDetails'
+      ? Array<OrderDetailGetPayload<S['include'][P]>> : never
     }
   : 'select' extends U
     ? {
@@ -2954,7 +2959,9 @@ export type ProductGetPayload<
       P extends 'category'
       ? CategoryGetPayload<S['select'][P]> :
       P extends 'cart'
-      ? Array<CartGetPayload<S['select'][P]>> : never
+      ? Array<CartGetPayload<S['select'][P]>> :
+      P extends 'orderDetails'
+      ? Array<OrderDetailGetPayload<S['select'][P]>> : never
     }
   : Product
 : Product
@@ -3143,6 +3150,8 @@ export declare class Prisma__ProductClient<T> implements Promise<T> {
   category<T extends CategoryArgs = {}>(args?: Subset<T, CategoryArgs>): CheckSelect<T, Prisma__CategoryClient<Category | null>, Prisma__CategoryClient<CategoryGetPayload<T> | null>>;
 
   cart<T extends FindManyCartArgs = {}>(args?: Subset<T, FindManyCartArgs>): CheckSelect<T, Promise<Array<Cart>>, Promise<Array<CartGetPayload<T>>>>;
+
+  orderDetails<T extends FindManyOrderDetailArgs = {}>(args?: Subset<T, FindManyOrderDetailArgs>): CheckSelect<T, Promise<Array<OrderDetail>>, Promise<Array<OrderDetailGetPayload<T>>>>;
 
   private get _document();
   /**
@@ -3938,6 +3947,7 @@ export type Order = {
   address: string | null
   pinCode: string | null
   city: string | null
+  totalQty: number | null
   userId: number
   totalPrice: number | null
   payMode: string | null
@@ -3956,24 +3966,28 @@ export type AggregateOrder = {
 
 export type OrderAvgAggregateOutputType = {
   id: number
+  totalQty: number | null
   userId: number
   totalPrice: number | null
 }
 
 export type OrderSumAggregateOutputType = {
   id: number
+  totalQty: number | null
   userId: number
   totalPrice: number | null
 }
 
 export type OrderMinAggregateOutputType = {
   id: number
+  totalQty: number | null
   userId: number
   totalPrice: number | null
 }
 
 export type OrderMaxAggregateOutputType = {
   id: number
+  totalQty: number | null
   userId: number
   totalPrice: number | null
 }
@@ -3981,24 +3995,28 @@ export type OrderMaxAggregateOutputType = {
 
 export type OrderAvgAggregateInputType = {
   id?: true
+  totalQty?: true
   userId?: true
   totalPrice?: true
 }
 
 export type OrderSumAggregateInputType = {
   id?: true
+  totalQty?: true
   userId?: true
   totalPrice?: true
 }
 
 export type OrderMinAggregateInputType = {
   id?: true
+  totalQty?: true
   userId?: true
   totalPrice?: true
 }
 
 export type OrderMaxAggregateInputType = {
   id?: true
+  totalQty?: true
   userId?: true
   totalPrice?: true
 }
@@ -4035,6 +4053,7 @@ export type OrderSelect = {
   address?: boolean
   pinCode?: boolean
   city?: boolean
+  totalQty?: boolean
   user?: boolean | UserArgs
   userId?: boolean
   orderDetails?: boolean | FindManyOrderDetailArgs
@@ -4606,12 +4625,14 @@ export type OrderDetailSelect = {
   quantity?: boolean
   order?: boolean | OrderArgs
   orderId?: boolean
+  product?: boolean | ProductArgs
   goodsId?: boolean
   productPrice?: boolean
 }
 
 export type OrderDetailInclude = {
   order?: boolean | OrderArgs
+  product?: boolean | ProductArgs
 }
 
 export type OrderDetailGetPayload<
@@ -4626,14 +4647,18 @@ export type OrderDetailGetPayload<
     ? OrderDetail  & {
       [P in TrueKeys<S['include']>]:
       P extends 'order'
-      ? OrderGetPayload<S['include'][P]> : never
+      ? OrderGetPayload<S['include'][P]> :
+      P extends 'product'
+      ? ProductGetPayload<S['include'][P]> : never
     }
   : 'select' extends U
     ? {
       [P in TrueKeys<S['select']>]:P extends keyof OrderDetail ? OrderDetail[P]
 : 
       P extends 'order'
-      ? OrderGetPayload<S['select'][P]> : never
+      ? OrderGetPayload<S['select'][P]> :
+      P extends 'product'
+      ? ProductGetPayload<S['select'][P]> : never
     }
   : OrderDetail
 : OrderDetail
@@ -4820,6 +4845,8 @@ export declare class Prisma__OrderDetailClient<T> implements Promise<T> {
   readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
   order<T extends OrderArgs = {}>(args?: Subset<T, OrderArgs>): CheckSelect<T, Prisma__OrderClient<Order | null>, Prisma__OrderClient<OrderGetPayload<T> | null>>;
+
+  product<T extends ProductArgs = {}>(args?: Subset<T, ProductArgs>): CheckSelect<T, Prisma__ProductClient<Product | null>, Prisma__ProductClient<ProductGetPayload<T> | null>>;
 
   private get _document();
   /**
@@ -5737,6 +5764,7 @@ export type ProductWhereInput = {
   category?: CategoryRelationFilter | CategoryWhereInput
   categoryId?: IntFilter | number
   cart?: CartListRelationFilter
+  orderDetails?: OrderDetailListRelationFilter
 }
 
 export type ProductOrderByInput = {
@@ -5795,6 +5823,7 @@ export type OrderWhereInput = {
   address?: StringNullableFilter | string | null
   pinCode?: StringNullableFilter | string | null
   city?: StringNullableFilter | string | null
+  totalQty?: IntNullableFilter | number | null
   user?: UserRelationFilter | UserWhereInput
   userId?: IntFilter | number
   orderDetails?: OrderDetailListRelationFilter
@@ -5812,6 +5841,7 @@ export type OrderOrderByInput = {
   address?: SortOrder
   pinCode?: SortOrder
   city?: SortOrder
+  totalQty?: SortOrder
   userId?: SortOrder
   totalPrice?: SortOrder
   payMode?: SortOrder
@@ -5833,6 +5863,7 @@ export type OrderDetailWhereInput = {
   quantity?: FloatFilter | number
   order?: OrderRelationFilter | OrderWhereInput
   orderId?: IntFilter | number
+  product?: ProductRelationFilter | ProductWhereInput
   goodsId?: IntFilter | number
   productPrice?: FloatFilter | number
 }
@@ -6038,6 +6069,7 @@ export type ProductCreateInput = {
   measureUnit: string
   category: CategoryCreateOneWithoutProductInput
   cart?: CartCreateManyWithoutProductInput
+  orderDetails?: OrderDetailCreateManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -6052,6 +6084,7 @@ export type ProductUpdateInput = {
   measureUnit?: string | StringFieldUpdateOperationsInput
   category?: CategoryUpdateOneRequiredWithoutProductInput
   cart?: CartUpdateManyWithoutProductInput
+  orderDetails?: OrderDetailUpdateManyWithoutProductInput
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -6098,6 +6131,7 @@ export type OrderCreateInput = {
   address?: string | null
   pinCode?: string | null
   city?: string | null
+  totalQty?: number | null
   totalPrice?: number | null
   payMode?: string | null
   payStatus?: string | null
@@ -6113,6 +6147,7 @@ export type OrderUpdateInput = {
   address?: string | NullableStringFieldUpdateOperationsInput | null
   pinCode?: string | NullableStringFieldUpdateOperationsInput | null
   city?: string | NullableStringFieldUpdateOperationsInput | null
+  totalQty?: number | NullableIntFieldUpdateOperationsInput | null
   totalPrice?: number | NullableFloatFieldUpdateOperationsInput | null
   payMode?: string | NullableStringFieldUpdateOperationsInput | null
   payStatus?: string | NullableStringFieldUpdateOperationsInput | null
@@ -6128,6 +6163,7 @@ export type OrderUpdateManyMutationInput = {
   address?: string | NullableStringFieldUpdateOperationsInput | null
   pinCode?: string | NullableStringFieldUpdateOperationsInput | null
   city?: string | NullableStringFieldUpdateOperationsInput | null
+  totalQty?: number | NullableIntFieldUpdateOperationsInput | null
   totalPrice?: number | NullableFloatFieldUpdateOperationsInput | null
   payMode?: string | NullableStringFieldUpdateOperationsInput | null
   payStatus?: string | NullableStringFieldUpdateOperationsInput | null
@@ -6138,25 +6174,24 @@ export type OrderDetailCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   quantity: number
-  goodsId: number
   productPrice: number
   order: OrderCreateOneWithoutOrderDetailsInput
+  product: ProductCreateOneWithoutOrderDetailsInput
 }
 
 export type OrderDetailUpdateInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
   quantity?: number | FloatFieldUpdateOperationsInput
-  goodsId?: number | IntFieldUpdateOperationsInput
   productPrice?: number | FloatFieldUpdateOperationsInput
   order?: OrderUpdateOneRequiredWithoutOrderDetailsInput
+  product?: ProductUpdateOneRequiredWithoutOrderDetailsInput
 }
 
 export type OrderDetailUpdateManyMutationInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
   quantity?: number | FloatFieldUpdateOperationsInput
-  goodsId?: number | IntFieldUpdateOperationsInput
   productPrice?: number | FloatFieldUpdateOperationsInput
 }
 
@@ -6313,6 +6348,12 @@ export type CategoryRelationFilter = {
   isNot?: CategoryWhereInput
 }
 
+export type OrderDetailListRelationFilter = {
+  every?: OrderDetailWhereInput
+  some?: OrderDetailWhereInput
+  none?: OrderDetailWhereInput
+}
+
 export type ProductRelationFilter = {
   is?: ProductWhereInput
   isNot?: ProductWhereInput
@@ -6332,12 +6373,6 @@ export type FloatNullableFilter = {
 export type UserIdProductIdCompoundUniqueInput = {
   userId: number
   productId: number
-}
-
-export type OrderDetailListRelationFilter = {
-  every?: OrderDetailWhereInput
-  some?: OrderDetailWhereInput
-  none?: OrderDetailWhereInput
 }
 
 export type OrderRelationFilter = {
@@ -6500,6 +6535,11 @@ export type CartCreateManyWithoutProductInput = {
   connect?: CartWhereUniqueInput | Enumerable<CartWhereUniqueInput>
 }
 
+export type OrderDetailCreateManyWithoutProductInput = {
+  create?: OrderDetailCreateWithoutProductInput | Enumerable<OrderDetailCreateWithoutProductInput>
+  connect?: OrderDetailWhereUniqueInput | Enumerable<OrderDetailWhereUniqueInput>
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -6533,6 +6573,18 @@ export type CartUpdateManyWithoutProductInput = {
   updateMany?: CartUpdateManyWithWhereNestedInput | Enumerable<CartUpdateManyWithWhereNestedInput>
   deleteMany?: CartScalarWhereInput | Enumerable<CartScalarWhereInput>
   upsert?: CartUpsertWithWhereUniqueWithoutProductInput | Enumerable<CartUpsertWithWhereUniqueWithoutProductInput>
+}
+
+export type OrderDetailUpdateManyWithoutProductInput = {
+  create?: OrderDetailCreateWithoutProductInput | Enumerable<OrderDetailCreateWithoutProductInput>
+  connect?: OrderDetailWhereUniqueInput | Enumerable<OrderDetailWhereUniqueInput>
+  set?: OrderDetailWhereUniqueInput | Enumerable<OrderDetailWhereUniqueInput>
+  disconnect?: OrderDetailWhereUniqueInput | Enumerable<OrderDetailWhereUniqueInput>
+  delete?: OrderDetailWhereUniqueInput | Enumerable<OrderDetailWhereUniqueInput>
+  update?: OrderDetailUpdateWithWhereUniqueWithoutProductInput | Enumerable<OrderDetailUpdateWithWhereUniqueWithoutProductInput>
+  updateMany?: OrderDetailUpdateManyWithWhereNestedInput | Enumerable<OrderDetailUpdateManyWithWhereNestedInput>
+  deleteMany?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
+  upsert?: OrderDetailUpsertWithWhereUniqueWithoutProductInput | Enumerable<OrderDetailUpsertWithWhereUniqueWithoutProductInput>
 }
 
 export type ProductCreateOneWithoutCartInput = {
@@ -6609,11 +6661,23 @@ export type OrderCreateOneWithoutOrderDetailsInput = {
   connect?: OrderWhereUniqueInput
 }
 
+export type ProductCreateOneWithoutOrderDetailsInput = {
+  create?: ProductCreateWithoutOrderDetailsInput
+  connect?: ProductWhereUniqueInput
+}
+
 export type OrderUpdateOneRequiredWithoutOrderDetailsInput = {
   create?: OrderCreateWithoutOrderDetailsInput
   connect?: OrderWhereUniqueInput
   update?: OrderUpdateWithoutOrderDetailsDataInput
   upsert?: OrderUpsertWithoutOrderDetailsInput
+}
+
+export type ProductUpdateOneRequiredWithoutOrderDetailsInput = {
+  create?: ProductCreateWithoutOrderDetailsInput
+  connect?: ProductWhereUniqueInput
+  update?: ProductUpdateWithoutOrderDetailsDataInput
+  upsert?: ProductUpsertWithoutOrderDetailsInput
 }
 
 export type UserCreateOneWithoutTopItemsInput = {
@@ -6771,6 +6835,7 @@ export type OrderCreateWithoutUserInput = {
   address?: string | null
   pinCode?: string | null
   city?: string | null
+  totalQty?: number | null
   totalPrice?: number | null
   payMode?: string | null
   payStatus?: string | null
@@ -6888,6 +6953,7 @@ export type OrderScalarWhereInput = {
   address?: StringNullableFilter | string | null
   pinCode?: StringNullableFilter | string | null
   city?: StringNullableFilter | string | null
+  totalQty?: IntNullableFilter | number | null
   userId?: IntFilter | number
   totalPrice?: FloatNullableFilter | number | null
   payMode?: StringNullableFilter | string | null
@@ -7005,6 +7071,7 @@ export type ProductCreateWithoutCategoryInput = {
   stock: boolean
   measureUnit: string
   cart?: CartCreateManyWithoutProductInput
+  orderDetails?: OrderDetailCreateManyWithoutProductInput
 }
 
 export type ProductUpdateWithWhereUniqueWithoutCategoryInput = {
@@ -7054,6 +7121,14 @@ export type CartCreateWithoutProductInput = {
   user: UserCreateOneWithoutCartInput
 }
 
+export type OrderDetailCreateWithoutProductInput = {
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  quantity: number
+  productPrice: number
+  order: OrderCreateOneWithoutOrderDetailsInput
+}
+
 export type CategoryUpdateWithoutProductDataInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
@@ -7076,6 +7151,35 @@ export type CartUpsertWithWhereUniqueWithoutProductInput = {
   create: CartCreateWithoutProductInput
 }
 
+export type OrderDetailUpdateWithWhereUniqueWithoutProductInput = {
+  where: OrderDetailWhereUniqueInput
+  data: OrderDetailUpdateWithoutProductDataInput
+}
+
+export type OrderDetailUpdateManyWithWhereNestedInput = {
+  where: OrderDetailScalarWhereInput
+  data: OrderDetailUpdateManyDataInput
+}
+
+export type OrderDetailScalarWhereInput = {
+  AND?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
+  OR?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
+  NOT?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
+  id?: IntFilter | number
+  createdAt?: DateTimeFilter | Date | string
+  updatedAt?: DateTimeFilter | Date | string
+  quantity?: FloatFilter | number
+  orderId?: IntFilter | number
+  goodsId?: IntFilter | number
+  productPrice?: FloatFilter | number
+}
+
+export type OrderDetailUpsertWithWhereUniqueWithoutProductInput = {
+  where: OrderDetailWhereUniqueInput
+  update: OrderDetailUpdateWithoutProductDataInput
+  create: OrderDetailCreateWithoutProductInput
+}
+
 export type ProductCreateWithoutCartInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7087,6 +7191,7 @@ export type ProductCreateWithoutCartInput = {
   stock: boolean
   measureUnit: string
   category: CategoryCreateOneWithoutProductInput
+  orderDetails?: OrderDetailCreateManyWithoutProductInput
 }
 
 export type UserCreateWithoutCartInput = {
@@ -7114,6 +7219,7 @@ export type ProductUpdateWithoutCartDataInput = {
   stock?: boolean | BoolFieldUpdateOperationsInput
   measureUnit?: string | StringFieldUpdateOperationsInput
   category?: CategoryUpdateOneRequiredWithoutProductInput
+  orderDetails?: OrderDetailUpdateManyWithoutProductInput
 }
 
 export type ProductUpsertWithoutCartInput = {
@@ -7158,8 +7264,8 @@ export type OrderDetailCreateWithoutOrderInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   quantity: number
-  goodsId: number
   productPrice: number
+  product: ProductCreateOneWithoutOrderDetailsInput
 }
 
 export type UserUpdateWithoutOrdersDataInput = {
@@ -7186,24 +7292,6 @@ export type OrderDetailUpdateWithWhereUniqueWithoutOrderInput = {
   data: OrderDetailUpdateWithoutOrderDataInput
 }
 
-export type OrderDetailUpdateManyWithWhereNestedInput = {
-  where: OrderDetailScalarWhereInput
-  data: OrderDetailUpdateManyDataInput
-}
-
-export type OrderDetailScalarWhereInput = {
-  AND?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
-  OR?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
-  NOT?: OrderDetailScalarWhereInput | Enumerable<OrderDetailScalarWhereInput>
-  id?: IntFilter | number
-  createdAt?: DateTimeFilter | Date | string
-  updatedAt?: DateTimeFilter | Date | string
-  quantity?: FloatFilter | number
-  orderId?: IntFilter | number
-  goodsId?: IntFilter | number
-  productPrice?: FloatFilter | number
-}
-
 export type OrderDetailUpsertWithWhereUniqueWithoutOrderInput = {
   where: OrderDetailWhereUniqueInput
   update: OrderDetailUpdateWithoutOrderDataInput
@@ -7217,11 +7305,26 @@ export type OrderCreateWithoutOrderDetailsInput = {
   address?: string | null
   pinCode?: string | null
   city?: string | null
+  totalQty?: number | null
   totalPrice?: number | null
   payMode?: string | null
   payStatus?: string | null
   orderStatus?: string | null
   user: UserCreateOneWithoutOrdersInput
+}
+
+export type ProductCreateWithoutOrderDetailsInput = {
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  price: number
+  imageUrl: string
+  description: string
+  minQuantity: number
+  stock: boolean
+  measureUnit: string
+  category: CategoryCreateOneWithoutProductInput
+  cart?: CartCreateManyWithoutProductInput
 }
 
 export type OrderUpdateWithoutOrderDetailsDataInput = {
@@ -7231,6 +7334,7 @@ export type OrderUpdateWithoutOrderDetailsDataInput = {
   address?: string | NullableStringFieldUpdateOperationsInput | null
   pinCode?: string | NullableStringFieldUpdateOperationsInput | null
   city?: string | NullableStringFieldUpdateOperationsInput | null
+  totalQty?: number | NullableIntFieldUpdateOperationsInput | null
   totalPrice?: number | NullableFloatFieldUpdateOperationsInput | null
   payMode?: string | NullableStringFieldUpdateOperationsInput | null
   payStatus?: string | NullableStringFieldUpdateOperationsInput | null
@@ -7241,6 +7345,25 @@ export type OrderUpdateWithoutOrderDetailsDataInput = {
 export type OrderUpsertWithoutOrderDetailsInput = {
   update: OrderUpdateWithoutOrderDetailsDataInput
   create: OrderCreateWithoutOrderDetailsInput
+}
+
+export type ProductUpdateWithoutOrderDetailsDataInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  name?: string | StringFieldUpdateOperationsInput
+  price?: number | FloatFieldUpdateOperationsInput
+  imageUrl?: string | StringFieldUpdateOperationsInput
+  description?: string | StringFieldUpdateOperationsInput
+  minQuantity?: number | IntFieldUpdateOperationsInput
+  stock?: boolean | BoolFieldUpdateOperationsInput
+  measureUnit?: string | StringFieldUpdateOperationsInput
+  category?: CategoryUpdateOneRequiredWithoutProductInput
+  cart?: CartUpdateManyWithoutProductInput
+}
+
+export type ProductUpsertWithoutOrderDetailsInput = {
+  update: ProductUpdateWithoutOrderDetailsDataInput
+  create: ProductCreateWithoutOrderDetailsInput
 }
 
 export type UserCreateWithoutTopItemsInput = {
@@ -7320,6 +7443,7 @@ export type OrderUpdateWithoutUserDataInput = {
   address?: string | NullableStringFieldUpdateOperationsInput | null
   pinCode?: string | NullableStringFieldUpdateOperationsInput | null
   city?: string | NullableStringFieldUpdateOperationsInput | null
+  totalQty?: number | NullableIntFieldUpdateOperationsInput | null
   totalPrice?: number | NullableFloatFieldUpdateOperationsInput | null
   payMode?: string | NullableStringFieldUpdateOperationsInput | null
   payStatus?: string | NullableStringFieldUpdateOperationsInput | null
@@ -7334,6 +7458,7 @@ export type OrderUpdateManyDataInput = {
   address?: string | NullableStringFieldUpdateOperationsInput | null
   pinCode?: string | NullableStringFieldUpdateOperationsInput | null
   city?: string | NullableStringFieldUpdateOperationsInput | null
+  totalQty?: number | NullableIntFieldUpdateOperationsInput | null
   totalPrice?: number | NullableFloatFieldUpdateOperationsInput | null
   payMode?: string | NullableStringFieldUpdateOperationsInput | null
   payStatus?: string | NullableStringFieldUpdateOperationsInput | null
@@ -7363,6 +7488,7 @@ export type ProductUpdateWithoutCategoryDataInput = {
   stock?: boolean | BoolFieldUpdateOperationsInput
   measureUnit?: string | StringFieldUpdateOperationsInput
   cart?: CartUpdateManyWithoutProductInput
+  orderDetails?: OrderDetailUpdateManyWithoutProductInput
 }
 
 export type ProductUpdateManyDataInput = {
@@ -7385,20 +7511,27 @@ export type CartUpdateWithoutProductDataInput = {
   user?: UserUpdateOneRequiredWithoutCartInput
 }
 
-export type OrderDetailUpdateWithoutOrderDataInput = {
+export type OrderDetailUpdateWithoutProductDataInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
   quantity?: number | FloatFieldUpdateOperationsInput
-  goodsId?: number | IntFieldUpdateOperationsInput
   productPrice?: number | FloatFieldUpdateOperationsInput
+  order?: OrderUpdateOneRequiredWithoutOrderDetailsInput
 }
 
 export type OrderDetailUpdateManyDataInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
   quantity?: number | FloatFieldUpdateOperationsInput
-  goodsId?: number | IntFieldUpdateOperationsInput
   productPrice?: number | FloatFieldUpdateOperationsInput
+}
+
+export type OrderDetailUpdateWithoutOrderDataInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  updatedAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  quantity?: number | FloatFieldUpdateOperationsInput
+  productPrice?: number | FloatFieldUpdateOperationsInput
+  product?: ProductUpdateOneRequiredWithoutOrderDetailsInput
 }
 
 /**

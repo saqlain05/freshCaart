@@ -29,7 +29,7 @@ const OrderHistory = ({orders}) => {
             {/* <h2 className={styles.head2}>0015</h2> */}
            
             {/* <h2 className={styles.head2}>28 Oct 2020 10PM</h2> */}
-            <h2 className={styles.head2}> {orderss.updatedAt} </h2>
+            <h2 className={styles.head2}> {orderss.updatedAt.toLocaleString()} </h2>
         
             <h2 className={styles.head2}> {orderss.totalPrice} INR</h2>
             {/* <h2 className={styles.head2}>1785 INR</h2> */}

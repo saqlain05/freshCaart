@@ -42,6 +42,7 @@ export const ProfilesList = ({url}) => {
     <div>
      
     <Profile url={url}/>
+
      
     </div>
   )

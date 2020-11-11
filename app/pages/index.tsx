@@ -4,6 +4,7 @@ import { Link } from 'blitz'
 import React, { useEffect } from 'react'
 import cookie from 'js-cookie'
 import styles from '../styles/FrontPage.module.scss'
+import DigitalRamaFooter from 'app/products/components/DigitalRamaFooter'
 
 const index = () => {
   useEffect(() => {
@@ -37,7 +38,10 @@ const index = () => {
           <img src="https://www.growthrabbit.com/wp-content/uploads/2019/02/undraw_add_to_cart_vkjp.png" alt="img" className={styles.image} />
         </div>
       </div>
+      {/* <DigitalRamaFooter /> */}
     </div>
+
+    
   )
 }
 
