@@ -7,7 +7,6 @@ export default async function getProfiles(
   { where, orderBy, skip = 0, take }: GetProfilesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
 
   const profiles = await db.profile.findMany({
     where,

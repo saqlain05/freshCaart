@@ -8,12 +8,12 @@ import ProfileForm from "app/profiles/components/ProfileForm"
 export const EditProfile = () => {
   const router = useRouter()
   const profileId = useParam("profileId", "number")
-  const [profile, { mutate }] = useQuery(getProfile, { where: { id: profileId } })
+  //const [profile, { mutate }] = useQuery(getProfile, { where: { id: profileId } })
   const [updateProfileMutation] = useMutation(updateProfile)
 
   return (
     <div>
-      <h1>Edit Profile {profile.id}</h1>
+      {/* <h1>Edit Profile {profile.id}</h1>
       <pre>{JSON.stringify(profile)}</pre>
 
       <ProfileForm
@@ -32,7 +32,7 @@ export const EditProfile = () => {
             alert("Error creating profile " + JSON.stringify(error, null, 2))
           }
         }}
-      />
+      /> */}
     </div>
   )
 }

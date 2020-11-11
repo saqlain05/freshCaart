@@ -21,7 +21,6 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
     res.end()
     return {
       props: {
-        data: JSON.stringify(res)
       }
     }
   }
@@ -32,7 +31,7 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
     res.end()    
     return {
       props: {
-        data: JSON.stringify(res)
+        
       }
     }
   }
@@ -43,32 +42,32 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
     
 
   return {
-    props: {
-      userId: Number(token),
-      profile
-    }
+    props: {profile}
   }
 }
 
-const OrdersPage: BlitzPage = ({userId, profile}) => {
-  console.log(profile)
-  if(profile === null) {
+const OrdersPage: BlitzPage = (props) => {
+  console.log(props)
+  let value
+  value = props
+  if(value.profile === null) {
     alert('please complete your profile')
     Router.push('/profiles')
   } 
-   
+  const {token} = parseCookies()
+  const userId = token
   return (
     <div>
-      {profile!==null && (
+      {value.profile!==null && (
         <Suspense fallback={<div> <LoaderTwo /> </div>}>
           <div style={{width:'75%', margin:'auto', marginTop:'10%'}}>
           <h1 style={{margin: '1rem 0'}}> Order Details </h1>
-            <h2 style={{margin: '1rem 0', textTransform:'capitalize'}}><b>{profile.shopName} </b></h2>
-            <p style={{margin: '1rem 0'}}>{profile.address}, {profile.city} </p>
+            <h2 style={{margin: '1rem 0', textTransform:'capitalize'}}><b>{value.profile.shopName} </b></h2>
+            <p style={{margin: '1rem 0'}}>{value.profile.address}, {value.profile.city} </p>
             <p style={{margin: '1rem 0'}}>Payment Mode - <b>Cash On Delivary</b> (COD) </p>
           </div>
           
-          <PlaceOrder profile={profile} userId={userId}/>
+          <PlaceOrder profile={value.profile} userId={userId}/>
           <hr style={{margin:'1rem 0 '}} />
           <Phone />
         </Suspense>

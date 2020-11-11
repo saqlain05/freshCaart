@@ -12,19 +12,26 @@ type LayoutProps = {
   children: ReactNode
 }
 
-export const contextValues:ItemContextInterface = {
-  itemQty: 0,
-  totalAmount: 0,
-  localObject: {},
-  id: 0
-}
+
 
 const Layout = ({ title, children }: LayoutProps) => {
 
-  const [state, dispatch] = useReducer(ItemReducer, contextValues)
   const [show, setShow] = useState(false)
   const [grandQty, setGrandQty] = useState(0)
   const [grandAmount, setGrandAmount] = useState(0)
+
+  const contextValues:ItemContextInterface = {
+    itemQty: 0,
+    totalAmount: 0,
+    localObject: {},
+    id: 0,
+    show: false,
+    setShow, 
+    grandQty,
+    setGrandQty,
+    grandAmount,
+    setGrandAmount
+  }
   
   return (
     <>

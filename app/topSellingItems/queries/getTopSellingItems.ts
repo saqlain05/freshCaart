@@ -10,7 +10,6 @@ export default async function getTopSellingItems(
   { where, orderBy, skip = 0, take }: GetTopSellingItemsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
 
   const topSellingItems = await db.topSellingItem.findMany({
     where,

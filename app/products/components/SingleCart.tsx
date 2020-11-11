@@ -12,11 +12,11 @@ const SingleCart = ({bucket}) => {
     const user = useSession()
     const [qty, setQty] = useState(bucket.quantity)
     const [amt, setAmt] = useState(bucket.productPrice)
-    const {setGrandAmount, setGrandQty, grandAmount, grandQty} = useContext(ItemContext)
+    const test = useContext(ItemContext)
     const [deleteCartMutation] = useMutation(deleteCart)
 
     useEffect(() => {
-        const basket = JSON.parse(window.localStorage.getItem('cart'))
+        const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
         if(basket.cart.length > 0) 
         basket.cart.forEach(carts => {
             if (carts.productId === bucket.product.id) {
@@ -24,14 +24,14 @@ const SingleCart = ({bucket}) => {
                 setAmt(carts.price)
             }
         })
-        setGrandQty(basket.totalQty)
-        setGrandAmount(basket.totalAmount)
+        test?.setGrandQty(basket.totalQty)
+        test?.setGrandAmount(basket.totalAmount)
     }, [])
 
     const incrementValue = () => {
         setQty(qty + 1)
         setAmt((qty + 1) * cart.product.price)
-        const bakset = JSON.parse(window.localStorage.getItem('cart'))
+        const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
         bakset.cart.forEach(carts => {
             if(carts.productId === cart.productId) {
                 ++carts.quantity
@@ -41,14 +41,14 @@ const SingleCart = ({bucket}) => {
         ++bakset.totalQty
         bakset.totalAmount += cart.product.price
         window.localStorage.setItem('cart', JSON.stringify(bakset))
-        setGrandQty(grandQty + 1)
-        setGrandAmount(grandAmount + cart.product.price)
+        test?.setGrandQty(test?.grandQty + 1)
+        test?.setGrandAmount(test?.grandAmount + cart.product.price)
     }
 
     const decrementValue = () => {
         setQty(qty - 1)
         setAmt((qty - 1) * cart.product.price)
-        const bakset = JSON.parse(window.localStorage.getItem('cart'))
+        const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
         bakset.cart.forEach(carts => {
             if(carts.productId === cart.product.id) {
                 --carts.quantity
@@ -58,18 +58,18 @@ const SingleCart = ({bucket}) => {
         --bakset.totalQty
         bakset.totalAmount -= cart.product.price
         window.localStorage.setItem('cart', JSON.stringify(bakset))
-        setGrandQty(grandQty - 1)
-        setGrandAmount(grandAmount - cart.product.price)
+        test?.setGrandQty(test?.grandQty - 1)
+        test?.setGrandAmount(test?.grandAmount - cart.product.price)
     }
 
     const deleteIndCart = async () => {
-        const bakset = JSON.parse(window.localStorage.getItem('cart'))
+        const bakset = JSON.parse(window.localStorage.getItem('cart') || '{}')
         bakset.cart.forEach(list => {
             if(list.productId === bucket.product.id) {
                 bakset.totalQty -= qty
                 bakset.totalAmount -= amt
-                setGrandQty(bakset.totalQty)
-                setGrandAmount(bakset.totalAmount)
+                test?.setGrandQty(bakset.totalQty)
+                test?.setGrandAmount(bakset.totalAmount)
             }
         })
         console.log(cart.product.id)

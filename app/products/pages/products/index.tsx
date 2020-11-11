@@ -55,13 +55,15 @@ export const ViewCart = ({data}) => {
   )
 }
 
-const ProductsPage: BlitzPage = ({data}) => {
-  const {show} = useContext(ItemContext)
+const ProductsPage: BlitzPage = (props) => {
+  let data
+  data = props
+  const test = useContext(ItemContext)
   return (
     <div>
       <Suspense fallback={<div> <Loader /> </div>}>
-        <ViewCart data={data}/>
-        {show && (
+        <ViewCart data={data.data}/>
+        {test?.show && (
           <FooterPrice />
         )}
       </Suspense>

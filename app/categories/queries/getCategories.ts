@@ -7,7 +7,6 @@ export default async function getCategories(
   { where, orderBy, skip = 0, take }: GetCategoriesInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
 
   const categories = await db.category.findMany({
     where,

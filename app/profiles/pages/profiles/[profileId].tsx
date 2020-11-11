@@ -7,23 +7,23 @@ import deleteProfile from "app/profiles/mutations/deleteProfile"
 export const Profile = () => {
   const router = useRouter()
   const profileId = useParam("profileId", "number")
-  const [profile] = useQuery(getProfile, { where: { id: profileId } })
+  //const [profile] = useQuery(getProfile, { where: { id: profileId } })
   const [deleteProfileMutation] = useMutation(deleteProfile)
 
   return (
     <div>
-      <h1>Profile {profile.id}</h1>
-      <pre>{JSON.stringify(profile, null, 2)}</pre>
+      {/* <h1>Profile {profile.id}</h1> */}
+      {/* <pre>{JSON.stringify(profile, null, 2)}</pre> */}
 
-      <Link href="/profiles/[profileId]/edit" as={`/profiles/${profile.id}/edit`}>
+      {/* <Link href="/profiles/[profileId]/edit" as={`/profiles/${profile.id}/edit`}>
         <a>Edit</a>
-      </Link>
+      </Link> */}
 
       <button
         type="button"
         onClick={async () => {
           if (window.confirm("This will be deleted")) {
-            await deleteProfileMutation({ where: { id: profile.id } })
+            //await deleteProfileMutation({ where: { id: profile.id } })
             router.push("/profiles")
           }
         }}

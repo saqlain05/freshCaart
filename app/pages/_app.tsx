@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 function RootErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   if (error?.name === "AuthenticationError") {
-    return <LoginForm onSuccess={resetErrorBoundary} />
+    return <LoginForm handleLogin={resetErrorBoundary} />
   } else if (error?.name === "AuthorizationError") {
     return (
       <ErrorComponent

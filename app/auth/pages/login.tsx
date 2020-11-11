@@ -10,15 +10,16 @@ export const getServerSideProps: GetServerSideProps = async () =>  {
   const data = JSON.parse(carts)
   console.log(data)
   return {
-    props: {
-      data
-    }
+    props: data
+    
   }
 }
 
-const LoginPage: BlitzPage = ({data}) => {
+
+
+const LoginPage: BlitzPage = (props:any) => {
   const router = useRouter()
-  console.log(data)
+  console.log(props)
   const cartObject = {
     cart: [],
     totalQty: 0,
@@ -31,9 +32,9 @@ const LoginPage: BlitzPage = ({data}) => {
     cookie.set('token', user.id)
     cookie.set('verified', user.verified)
     cookie.set('role', user.role)
-    const lists = data.carts.filter(cart => cart.userId === user.id)
+    const lists = props.carts.filter(cart => cart.userId === user.id)
     window.localStorage.setItem('cart', JSON.stringify(cartObject))
-    const basket = JSON.parse(window.localStorage.getItem('cart'))
+    const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
     if(lists.length > 0) {
       lists.forEach(list => {
         const newObject = {

@@ -12,18 +12,18 @@ import ItemContext from "app/contexts/ItemContext"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
-  const {setShow} = useContext(ItemContext)
+  const test = useContext(ItemContext)
  
   if (currentUser) {
     
-    const basket = JSON.parse(window.localStorage.getItem('cart'))
-    if(basket.cart.length > 0) setShow(true)
+    const basket = JSON.parse(window.localStorage.getItem('cart') || '{}')
+    if(basket.cart.length > 0) test?.setShow(true)
     return (
       <>
         <button
           className="button small"
           onClick={async () => {
-            await logout()
+            await logout(null)
           }}
         >
           Logout

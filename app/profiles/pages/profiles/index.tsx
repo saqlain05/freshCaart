@@ -48,14 +48,16 @@ export const ProfilesList = ({url}) => {
   )
 }
 
-const ProfilesPage: BlitzPage = ({url}) => {
-  console.log(url)
+const ProfilesPage: BlitzPage = (props) => {
+  let url
+  url = props
+  console.log(url.url)
   return (
     <div>
 
 
       <Suspense fallback={<div>Loading...</div>}>
-        <ProfilesList url={url}/>
+        <ProfilesList url={url.url}/>
       </Suspense>
     </div>
   )

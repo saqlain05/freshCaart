@@ -9,7 +9,7 @@ const OrderChange = ({basket, setValue, value}) => {
     const increment = () => {
       setQuantity(quantity + 1)
       setValue(value + 1)
-      const cart = JSON.parse(window.localStorage.getItem('cart'))
+      const cart = JSON.parse(window.localStorage.getItem('cart') || '{}')
       cart.forEach(cart => {
         cart.productId === basket.productId && (cart.quantity = quantity + 1 )
       })
@@ -19,7 +19,7 @@ const OrderChange = ({basket, setValue, value}) => {
     const decrement = () => {
       setQuantity(quantity - 1)
       setValue(value - 1)
-      const cart = JSON.parse(window.localStorage.getItem('cart'))
+      const cart = JSON.parse(window.localStorage.getItem('cart') || '{}')
       cart.forEach(cart => {
         cart.productId === basket.productId && (cart.quantity = quantity - 1 )
       })

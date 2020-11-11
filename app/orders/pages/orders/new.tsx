@@ -16,9 +16,9 @@ const NewOrderPage: BlitzPage = () => {
         initialValues={{}}
         onSubmit={async () => {
           try {
-            const order = await createOrderMutation({ data: { name: "MyName" } })
-            alert("Success!" + JSON.stringify(order))
-            router.push("/orders/[orderId]", `/orders/${order.id}`)
+            // const order = await createOrderMutation({ data: { name: "MyName" } })
+            // alert("Success!" + JSON.stringify(order))
+            // router.push("/orders/[orderId]", `/orders/${order.id}`)
           } catch (error) {
             alert("Error creating order " + JSON.stringify(error, null, 2))
           }
