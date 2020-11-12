@@ -5,9 +5,9 @@ import {parseCookies} from 'nookies'
 import cookie from 'js-cookie'
 import getProfile from "app/profiles/queries/getProfile"
 import PlaceOrder from "app/orders/components/PlaceOrder"
-import Loader from "app/products/components/Loader"
+import Loader from "../../../../app/products/components/Loader"
 import Phone from "app/products/components/Phone"
-import LoaderTwo from "app/products/components/LoaderTwo"
+import LoaderTwo from "../../../../app/products/components/LoaderTwo"
 
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null

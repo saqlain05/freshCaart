@@ -10,13 +10,31 @@ import AddImg from './AddImg'
 const AddProduct = () => {
 
     const [createProductMutation] = useMutation(createProduct)
+    const [img, setImg] = useState('')
+
+    const uploadFile = async (e) => {
+       const files = e.target.files
+       const data = new FormData()
+       data.append('file', files[0])
+       data.append('upload_preset', 'fileUpload')
+       const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+            method:"Post",
+            body:data
+       })
+       const file = await res.json()
+       console.log(file.secure_url)
+       setImg(file.secure_url)
+       console.log(img)
+    }
 
     const handleForm = async (formObj) => {
+        console.log(formObj)
+        console.log(img)
         try {
             const product = await createProductMutation({
                 data: {
                    name: formObj.name,
-                   imageUrl: formObj.imageUrl,
+                   imageUrl: img,
                    price: parseFloat(formObj.price),
                    minQuantity: parseInt(formObj.minQuantity),
                    measureUnit: formObj.measureUnit,
@@ -50,9 +68,11 @@ const AddProduct = () => {
                         </Field>
                         <Field name="imageUrl" >
                             {({input})=>(
-                                <input placeholder="Enter Image URL" type="text" {...input} />
+                                <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
                             )}
                         </Field>
+                        <input style={{fontSize:'.5rem', width:'85%', marginLeft:'1.6rem', height:'1rem'}} 
+                           value={img} readOnly placeholder="copy image Url Here" />
                         <Field name="price">
                             {({input})=>(
                                 <input placeholder="Product Price" type="number" {...input} />
