@@ -14,7 +14,7 @@ const orderSucc:BlitzPage = () => {
             <b> Cash On Delivary</b></span>
             </h5>
             <div style={{ display:'grid', placeItems:'center', textAlign:'center'}}>
-            <Link href="/orders/myorder">
+            <Link href="/orders/orderhistory">
                 <a style={{backgroundColor:'green', color:'white', cursor:'pointer', width:'50vw', 
                 textDecoration:'none', padding:' 0.5rem 0.5rem', borderRadius:'25px', border:'none' }}>
                     View Order Details

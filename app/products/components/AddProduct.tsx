@@ -4,6 +4,7 @@ import {Form , Field} from 'react-final-form'
 import { Router, useMutation } from 'blitz'
 import upsertProduct from '../mutations/upsertProduct'
 import createProduct from '../mutations/createProduct'
+import AddImg from './AddImg'
 
 
 const AddProduct = () => {
@@ -31,6 +32,8 @@ const AddProduct = () => {
     }
 
     return (
+        <>
+        <AddImg />
         <div className={styles.mainDiv}>
             <h3 className={styles.header}>Add Products</h3>
             <Form onSubmit={(formObj)=>{
@@ -90,6 +93,7 @@ const AddProduct = () => {
                 )}
             </Form>
         </div>
+        </>
     )
 }
 

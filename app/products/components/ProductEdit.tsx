@@ -6,6 +6,7 @@ import updateProduct from "app/products/mutations/updateProduct"
 import ProductForm from "app/products/components/ProductForm"
 import { Form, Field } from "react-final-form"
 import styles from '../../styles/Edit.module.scss'
+import AddImg from "./AddImg"
 
 const ProductEdit = () => {
     const router = useRouter()
@@ -15,6 +16,10 @@ const ProductEdit = () => {
 
   const onSubmit = async (formObj) => {
     try {
+        let stockType = false
+        if(formObj.stock==='1'){
+            stockType=true
+        }
         const updated = await updateProduct({
             where: { id: product.id },
             data: { 
@@ -24,7 +29,7 @@ const ProductEdit = () => {
                    minQuantity: parseInt(formObj.minQuantity),
                    measureUnit: formObj.measureUnit,
                    description: formObj.description,
-                   stock: Boolean(formObj.stock),
+                   stock: stockType,
                    category : {connect : {id: parseInt(formObj.category)}},
                 //    {include:{category:(true)}}
                 
@@ -37,7 +42,10 @@ const ProductEdit = () => {
         alert("Error creating article " + JSON.stringify(error, null, 2))
     }}
     return (
+        <>
+        <AddImg />
         <div className={styles.mainDiv}>
+        
             <h3>Edit Product</h3>
              <Form
                 onSubmit={onSubmit}
@@ -97,8 +105,8 @@ const ProductEdit = () => {
 
                         <Field name="stock" component="select" className={styles.select}>
                              <option >Select Stocks availability</option>
-                             <option value="true">In Stock</option>
-                             <option value="false">Out of Stock</option>
+                             <option value="1">In Stock</option>
+                             <option value="2">Out of Stock</option>
                         </Field>
                         <Field name="category" component="select" className={styles.select}>
                              <option>Select category</option>
@@ -106,7 +114,7 @@ const ProductEdit = () => {
                              <option value="2">Vegetables</option>
                         </Field>
                         
-
+                        <p style={{color:'red', fontSize:'.8rem', fontWeight:'bold'}}>**You Have To Select Category</p>
                         
                             <button type="submit">
                                 Edit Product
@@ -117,6 +125,7 @@ const ProductEdit = () => {
 
             </Form>
         </div>
+        </>
     )
 }
 
