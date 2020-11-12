@@ -23,7 +23,7 @@ const AddProduct = () => {
             body:data
        })
        const file = await res.json()
-       console.log(file.secure_url)
+    //    console.log(file.secure_url)
        setImg(file.secure_url)
     //    console.log(img)
     }
@@ -75,6 +75,12 @@ const AddProduct = () => {
                         </Field>
                         {/* <input style={{fontSize:'.5rem', width:'85%', marginLeft:'1.6rem', height:'1rem'}} 
                            value={img} readOnly placeholder="copy image Url Here" /> */}
+                           Upload and wait for image...
+                           { img!='' && 
+                        //    <>
+                           <img src={img} style={{width:'10rem', height:'10rem'}} />
+                        //    </>
+                        }
                         <Field name="price">
                             {({input})=>(
                                 <input placeholder="Product Price" type="number" {...input} />
