@@ -4,7 +4,7 @@ import { Form, FORM_ERROR } from "app/components/Form"
 import signup from "app/auth/mutations/signup"
 import { SignupInput, SignupInputType } from "app/auth/validations"
 import styles from '../../styles/Signup.module.scss'
-import { Link } from "blitz"
+import { Link,Router } from "blitz"
 
 type SignupFormProps = {
   onSuccess?: () => void
@@ -24,6 +24,7 @@ export const SignupForm = (props: SignupFormProps) => {
           try {
             await signup({name: values.name, email: values.email, password: values.password })
             alert('Please Login to continue')
+            // Router.push("/login");
             props.onSuccess && props.onSuccess()
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
