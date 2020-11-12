@@ -5,6 +5,7 @@ import { Router, useMutation } from 'blitz'
 import upsertProduct from '../mutations/upsertProduct'
 import createProduct from '../mutations/createProduct'
 import AddImg from './AddImg'
+import Loader from './Loader'
 
 
 const AddProduct = () => {
@@ -24,12 +25,12 @@ const AddProduct = () => {
        const file = await res.json()
        console.log(file.secure_url)
        setImg(file.secure_url)
-       console.log(img)
+    //    console.log(img)
     }
 
     const handleForm = async (formObj) => {
-        console.log(formObj)
-        console.log(img)
+        // console.log(formObj)
+        // console.log(img)
         try {
             const product = await createProductMutation({
                 data: {
@@ -55,8 +56,9 @@ const AddProduct = () => {
         <div className={styles.mainDiv}>
             <h3 className={styles.header}>Add Products</h3>
             <Form onSubmit={(formObj)=>{
-                alert("submitting!");
-                console.log(formObj)
+                alert("Product add Successfully");
+                <Loader />
+                // console.log(formObj)
                 handleForm(formObj)
             }}>
                 {({ handleSubmit })=>(
