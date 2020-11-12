@@ -3,6 +3,8 @@ import Layout from "app/layouts/Layout"
 import { Link, usePaginatedQuery, useRouter, BlitzPage, GetServerSideProps } from "blitz"
 import Profile from "app/profiles/components/Profile"
 import { parseCookies } from "nookies"
+import getProfile from "app/profiles/queries/getProfile"
+import Profile2 from "app/profiles/components/Profile2"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
 
@@ -19,9 +21,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
       }
     }
   }
+  const check = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
   return {
     props: {
-      data : true,
+      data : JSON.parse(check) === null ? true : false,
       url: ctx.req.headers.referer === undefined ? 'test' : ctx.req.headers.referer
     }
   }
@@ -31,19 +34,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
 export const ProfilesList = ({url}) => {
   console.log(url)
   const router = useRouter()
-  // const [{ profiles, hasMore }] = usePaginatedQuery(getProfiles, {
-  //   orderBy: { id: "asc" },
-  //   skip: ITEMS_PER_PAGE * page,
-  //   take: ITEMS_PER_PAGE,
-  // })
-
-
+  
   return (
     <div>
-     
-    <Profile url={url}/>
-
-     
+      <Profile url={url}/>
     </div>
   )
 }
@@ -54,10 +48,9 @@ const ProfilesPage: BlitzPage = (props) => {
   console.log(url.url)
   return (
     <div>
-
-
       <Suspense fallback={<div>Loading...</div>}>
-        <ProfilesList url={url.url}/>
+        {url.data ? <ProfilesList url={url.url}/> : <Profile2 /> }
+        
       </Suspense>
     </div>
   )
