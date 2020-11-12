@@ -17,7 +17,9 @@ const AddImg = () => {
         })
         const file = await res.json()
         console.log(file.url)
-        setUrl(file.url)
+        const saq = setUrl(file.url)
+
+        // imageUrl : saq;
     //    var imageUrl = ({imageUrl: file.secure_url})
         //  this.setState({image: file.secure_url})
     }

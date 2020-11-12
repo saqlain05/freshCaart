@@ -51,7 +51,7 @@ const AddProduct = () => {
 
     return (
         <>
-        <AddImg />
+        {/* <AddImg /> */}
         <div className={styles.mainDiv}>
             <h3 className={styles.header}>Add Products</h3>
             <Form onSubmit={(formObj)=>{
@@ -71,8 +71,8 @@ const AddProduct = () => {
                                 <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
                             )}
                         </Field>
-                        <input style={{fontSize:'.5rem', width:'85%', marginLeft:'1.6rem', height:'1rem'}} 
-                           value={img} readOnly placeholder="copy image Url Here" />
+                        {/* <input style={{fontSize:'.5rem', width:'85%', marginLeft:'1.6rem', height:'1rem'}} 
+                           value={img} readOnly placeholder="copy image Url Here" /> */}
                         <Field name="price">
                             {({input})=>(
                                 <input placeholder="Product Price" type="number" {...input} />
