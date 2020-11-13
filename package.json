@@ -45,6 +45,7 @@
     "nookies": "2.5.0",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
+    "react-double-marquee": "1.0.6",
     "react-error-boundary": "2.3.2",
     "react-final-form": "6.5.2",
     "sass": "1.29.0",

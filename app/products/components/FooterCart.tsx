@@ -5,6 +5,7 @@ import React, { useContext, useEffect } from 'react'
 import styles from '../../styles/FooterPrice.module.scss';
 
 const FooterCart = () => {
+    const maxQty = 34;
     const router = useRouter()
     const user = useSession()
     const test = useContext(ItemContext)
@@ -45,6 +46,11 @@ const FooterCart = () => {
         <div>
             <div className={styles.mainDivs}>
               <div className={styles.mainDiv}>
+              <div className={styles.google}>
+                <p>Total Quantity Should be more than <span> {maxQty} KG </span></p>
+                </div>
+                <div className={styles.google2}>
+                
                 <div className={styles.first}>
                     <h2 className={styles.header}>{test?.grandQty} <span className={styles.span}>Products</span></h2>
                 </div>
@@ -52,7 +58,8 @@ const FooterCart = () => {
                     <h2 className={styles.header2}>Rs. {test?.grandAmount}</h2>
                 </div>
                 <div className={styles.third}>
-                    <button disabled={Number(test?.grandQty) < 34 && true} onClick={handleClick} className={styles.button}>Place Order</button>
+                    <button disabled={Number(test?.grandQty) < maxQty && true} onClick={handleClick} className={styles.button}>Place Order</button>
+                </div>
                 </div>
               </div>
             </div>
