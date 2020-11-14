@@ -21,7 +21,7 @@ export const LoginForm = ({handleLogin}) => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
           try {
-            const user = await login({ email: values.email, password: values.password })
+            const user = await login({ email: values.email+'@gmail.com', password: values.password })
             handleLogin(user)
           } catch (error) {
             if (error.name === "AuthenticationError") {
@@ -36,7 +36,7 @@ export const LoginForm = ({handleLogin}) => {
         }}
       >
         {/* <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" /> */}
-        <LabeledTextField className={styles.input} name="email" label="Email" placeholder="Email" />
+        <LabeledTextField className={styles.input} name="email" label="Mobile" placeholder="mobile" type="text" />
         <LabeledTextField className={styles.input} name="password" label="Password" placeholder="Password" type="password" />
       </Form>
 
