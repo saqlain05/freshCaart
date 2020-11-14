@@ -22,7 +22,7 @@ model User {
   role           String    @default("user")
   sessions       Session[]
   profile        Profile?
-  cart           Cart?
+  cart           Cart[]
   orders         Order[]
   topItems       TopSellingItem[]
   verified       Boolean   @default(false)
@@ -43,24 +43,26 @@ model Session {
 }
 
 model Profile {
-  id              Int      @default(autoincrement()) @id
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  firstName       String   
-  lastName        String   
-  shopName        String   
-  phone           String      
-  whatsapp        String      
-  address         String   
-  city            String   
-  pincode         String      
-  openTime        String   
-  closeTime       String   
-  maxOrderAcceptTime String   
+  firstName       String?   
+  lastName        String?   
+  shopName        String?   
+  phone           String?      
+  whatsapp        String?      
+  address         String?   
+  city            String?   
+  pincode         String?      
+  openTime        String?   
+  closeTime       String?   
+  maxOrderAcceptTime String?   
   longitude       String?   
   latitude        String?   
-  user            User?   @relation(fields: [userId], references: [id]) 
-  userId          Int?    
+  user            User    @relation(fields: [userId], references: [id]) 
+  userId          Int 
+  imageA          String?
+  imageB          String?
+  @@id([userId])   
 }
 
 model Category {
@@ -85,12 +87,13 @@ model Product {
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int  
   cart        Cart[]    
+  orderDetails OrderDetail[]
 }
 
 model Cart {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  quantity  Float?    
+  quantity  Int?    
   product   Product  @relation(fields: [productId], references: [id])
   productId Int
   productPrice Float?      
@@ -106,7 +109,8 @@ model Order {
   phone        String?        
   address      String?        
   pinCode      String? 
-  city         String       
+  city         String? 
+  totalQty     Int?      
   user         User          @relation(fields: [userId], references: [id])
   userId       Int           
   orderDetails OrderDetail[] 
@@ -123,7 +127,8 @@ model OrderDetail {
   quantity  Float    
   order     Order    @relation(fields: [orderId], references: [id])
   orderId   Int
-  goodsId   Int?
+  product   Product  @relation(fields: [goodsId], references: [id])
+  goodsId   Int
   productPrice Float    
 }
 
