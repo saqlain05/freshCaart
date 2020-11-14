@@ -39,7 +39,7 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
   const data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
   if (JSON.parse(data) !== null)
     profile = JSON.parse(data)
-    
+  console.log(profile)  
 
   return {
     props: {profile}
