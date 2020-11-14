@@ -34,6 +34,8 @@
         flex-direction: column;
         width: 99%;
         margin: auto;
+
+   
         
 
         input{
@@ -51,6 +53,20 @@
         ::placeholder{
             color: $span;
         }
+.shop{
+    margin: .5rem 0;
+    padding: .51rem;
+    border: 1px solid green;
+
+        .imgAB{
+            display: flex;
+
+            input{
+                width: 99%;
+            }
+            
+        }
+    }
 
         button{
             background-color: $button;
@@ -83,7 +99,10 @@ width: 90%;
         margin-left: -1.8rem;
     }
         .formDiv{
-
+            .imgAB{
+                display: flex;
+                flex-direction: column;
+            }
             input{
                 margin: .5rem 0;
             }

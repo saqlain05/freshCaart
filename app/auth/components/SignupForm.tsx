@@ -17,15 +17,18 @@ export const SignupForm = (props: SignupFormProps) => {
 
       <Form<SignupInputType>
         className={styles.formDiv}
-        submitText="Create Account"
+        submitText="Sign Up and Next"
         schema={SignupInput}
         initialValues={{ name: "", password: "" }}
         onSubmit={async (values) => {
           try {
-            await signup({name: values.name, email: values.email+'@gmail.com', password: values.password })
-            alert('Please Login to continue')
+           const saquser = await signup({name: values.name, email: values.email+'@gmail.com', password: values.password })
+            alert('Please Add Shop Image to continue')
             // Router.push("/login");
+            window.localStorage.setItem('saquser', JSON.stringify(saquser));
             props.onSuccess && props.onSuccess()
+            // console.log(user)
+            
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
               // This error comes from Prisma
@@ -49,3 +52,5 @@ export const SignupForm = (props: SignupFormProps) => {
 }
 
 export default SignupForm
+
+// export {user};

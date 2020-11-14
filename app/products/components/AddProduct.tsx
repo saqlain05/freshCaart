@@ -75,7 +75,8 @@ const AddProduct = () => {
                         </Field>
                         {/* <input style={{fontSize:'.5rem', width:'85%', marginLeft:'1.6rem', height:'1rem'}} 
                            value={img} readOnly placeholder="copy image Url Here" /> */}
-                          { img=='' && <p>Upload and wait for image...</p> }                            { img!='' && 
+                          { img=='' && <p>Upload and wait for image...</p> } 
+                          { img!='' && 
                         //    <>
                            <img src={img} style={{width:'10rem', height:'10rem'}} />
                         //    </>
