@@ -7,7 +7,7 @@ import getProfile from "app/profiles/queries/getProfile"
 import Profile2 from "app/profiles/components/Profile2"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
-
+  let trueData
   console.log(ctx.req.headers.referer)
   const {token} = parseCookies(ctx)
   if(!token) {
@@ -22,9 +22,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
     }
   }
   const check = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
+  trueData = JSON.parse(check)
   return {
     props: {
-      data : JSON.parse(check) === null ? true : false,
+      data : trueData.firstName === null ? true : false,
       url: ctx.req.headers.referer === undefined ? 'test' : ctx.req.headers.referer
     }
   }

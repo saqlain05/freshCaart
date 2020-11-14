@@ -11,6 +11,8 @@ import LoaderTwo from "../../../../app/products/components/LoaderTwo"
 
 export const getServerSideProps:GetServerSideProps = async(ctx) => {
   let profile = null
+  let data
+  let trueData
   const {token} = parseCookies(ctx)
   const {verified} = parseCookies(ctx)
 
@@ -36,8 +38,9 @@ export const getServerSideProps:GetServerSideProps = async(ctx) => {
     }
   }
 
-  const data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
-  if (JSON.parse(data) !== null)
+  data = JSON.stringify(await getProfile({where: {userId: Number(token)}}))
+  trueData = JSON.parse(data)
+  if (trueData.firstName !== null)
     profile = JSON.parse(data)
   console.log(profile)  
 
