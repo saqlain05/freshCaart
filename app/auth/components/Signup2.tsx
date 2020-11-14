@@ -16,7 +16,6 @@ const Signup2 = () => {
         })
         console.log(lat, long)
       }, [lat, long])
-      user = JSON.parse(window.localStorage.getItem('saquser') || '{}')
 
 
     // const userId = useSession().userId
@@ -56,6 +55,7 @@ const Signup2 = () => {
     }
 
     const handleForm = async (formObj) => {
+        user = JSON.parse(window.localStorage.getItem('saquser') || '{}')
         console.log(user)
         try {
             const profile = await upsertProfileMutation({
