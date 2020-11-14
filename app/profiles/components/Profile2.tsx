@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Field } from "react-final-form"
 import { useParam, useQuery, useRouter, useSession } from "blitz"
 import getProfile from '../queries/getProfile'
@@ -7,6 +7,38 @@ import { useCurrentUser } from 'app/hooks/useCurrentUser'
 import styles from '../../styles/Edit.module.scss'
 
 const Profile2 = () => {
+    const [img, setImg] = useState('')
+
+    const uploadFile = async (e) => {
+       const files = e.target.files
+       const data = new FormData()
+       data.append('file', files[0])
+       data.append('upload_preset', 'fileUpload')
+       const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+            method:"Post",
+            body:data
+       })
+       const file = await res.json()
+    //    console.log(file.secure_url)
+       setImg(file.secure_url)
+    //    console.log(img)
+    }
+    const [img1, setImg1] = useState('')
+    const uploadFile1 = async (e) => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'fileUpload')
+        const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+             method:"Post",
+             body:data
+        })
+        const file = await res.json()
+     //    console.log(file.secure_url)
+        setImg1(file.secure_url)
+     //    console.log(img)
+     }
+
     const router = useRouter()
     const postId = useSession().userId
     const uid = useCurrentUser();
@@ -27,7 +59,10 @@ const Profile2 = () => {
                     phone: (formObj.phone).toString(),
                     pincode: (formObj.pincode).toString(),
                     shopName: formObj.shopName,
-                    whatsapp: (formObj.whatsapp).toString() },
+                    whatsapp: (formObj.whatsapp).toString(),
+                    imageA: img,
+                    imageB: img1,
+                 },
             })
             mutate(profile)
             // router.push("/posts/[postId]", `/posts/${updated.id}`)
@@ -41,6 +76,7 @@ const Profile2 = () => {
     return (
         <div className={styles.mainDiv}>
             <h3>Edit Your Profile</h3>
+            {/* <img src="" alt=""/> */}
             <Form
                 onSubmit={onSubmit}
                 initialValues={profile}
@@ -75,6 +111,43 @@ const Profile2 = () => {
                                 placeholder="Shop Name"
                             />
                         </div>
+                      
+                        <div className={styles.shop} style={{border: '2px solid green', margin:'1rem 0', padding:'.5rem'}}>
+                        <p style={{textAlign:'center'}}>Upload Shop Image</p>
+                        <div className={styles.imgAB}>
+                            
+                            <div>
+                            <Field name="imageA">
+                            {({input})=>(
+                                <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
+                            )}
+                        </Field>
+                        { img=='' && <p>Upload and wait for image...</p> } 
+                          { img!='' && 
+                        //    <>
+                           <img src={img} style={{width:'10rem', height:'10rem'}} />
+                        //    </>
+                        }
+                            </div>
+                       
+                        <div>
+                        <Field name="imageB">
+                            {({input})=>(
+                                <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile1(e)}/>
+                            )}
+                        </Field>
+                        { img1=='' && <p>Upload and wait for image...</p> } 
+                          { img1!='' && 
+                        //    <>
+                           <img src={img1} style={{width:'10rem', height:'10rem'}} />
+                        //    </>
+                        }
+                        </div>
+                        </div>
+                        </div>
+                   
+                           
+                       
 
                         <div>
                             <label htmlFor="">Address</label>

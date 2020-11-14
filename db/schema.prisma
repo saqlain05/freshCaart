@@ -79,7 +79,7 @@ model Product {
   updatedAt   DateTime @updatedAt
   name        String   
   price       Float    
-  imageUrl    String   
+  imageUrl    String?
   description String   
   minQuantity Int      
   stock       Boolean  

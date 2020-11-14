@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { Suspense, useState } from "react"
 import Layout from "app/layouts/Layout"
 import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
 import getProduct from "app/products/queries/getProduct"
@@ -9,6 +9,22 @@ import styles from '../../styles/Edit.module.scss'
 import AddImg from "./AddImg"
 
 const ProductEdit = () => {
+    const [img, setImg] = useState('')
+
+    const uploadFile = async (e) => {
+       const files = e.target.files
+       const data = new FormData()
+       data.append('file', files[0])
+       data.append('upload_preset', 'fileUpload')
+       const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+            method:"Post",
+            body:data
+       })
+       const file = await res.json()
+    //    console.log(file.secure_url)
+       setImg(file.secure_url)
+    //    console.log(img)
+    }
     const router = useRouter()
   const productId = useParam("productId", "number")
   const [product, { mutate }] = useQuery(getProduct, { where: { id: productId }, include: {category: true} })
@@ -24,7 +40,8 @@ const ProductEdit = () => {
             where: { id: product.id },
             data: { 
                 name: formObj.name,
-                   imageUrl: formObj.imageUrl,
+                //    imageUrl: formObj.imageUrl,
+                imageUrl: img,
                    price: parseFloat(formObj.price),
                    minQuantity: parseInt(formObj.minQuantity),
                    measureUnit: formObj.measureUnit,
@@ -43,7 +60,7 @@ const ProductEdit = () => {
     }}
     return (
         <>
-        <AddImg />
+        {/* <AddImg /> */}
         <div className={styles.mainDiv}>
         
             <h3>Edit Product</h3>
@@ -64,14 +81,26 @@ const ProductEdit = () => {
                             />
                         </div>
 
-                        <div>
+                        <Field name="imageUtl">
+                            {({input})=>(
+                                <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
+                            )}
+                        </Field>
+                       
+                          { img=='' && <p>Upload and wait for image...</p> } 
+                          { img!='' && 
+                           <img src={img} style={{width:'10rem', height:'10rem'}} />
+                        }
+
+                        {/* <div>
                             <Field
                                 name="imageUrl"
                                 component="input"
-                                type="text"
+                                type="file"
                                 placeholder="Blog Title"
+                                onChange={(e) => uploadFile(e)}
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <Field
                                 name="price"
