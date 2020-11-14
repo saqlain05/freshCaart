@@ -7,6 +7,7 @@ import styles from '../../styles/Profile.module.scss'
 const Signup2 = () => {
     const [lat, setLat] = useState(0)
     const [long, setLong] = useState(0)
+    let user
     useEffect(() => {
         window.navigator.geolocation.getCurrentPosition((psoition) => {
           console.log(psoition)
@@ -15,11 +16,10 @@ const Signup2 = () => {
         })
         console.log(lat, long)
       }, [lat, long])
-    const user = JSON.parse(window.localStorage.getItem('saquser') || '{}')
-    const userId = user.id;
+      user = JSON.parse(window.localStorage.getItem('saquser') || '{}')
+
 
     // const userId = useSession().userId
-    console.log(userId)
     const [upsertProfileMutation] = useMutation(upsertProfile)
 
     const [img, setImg] = useState('')
@@ -56,12 +56,11 @@ const Signup2 = () => {
     }
 
     const handleForm = async (formObj) => {
-        
+        console.log(user)
         try {
             const profile = await upsertProfileMutation({
                 where: {
-                    userId: userId,
-                    // id: post.id
+                    userId: user.id
                 },
                 update: {
                     
@@ -72,7 +71,7 @@ const Signup2 = () => {
                     
                 },
                 create: {
-                   user: {connect: {id: userId}},
+                   user: {connect: {id: user.id}},
                    
                    imageA : img,
                    imageB : img1,
@@ -104,9 +103,7 @@ const Signup2 = () => {
                      <div className={styles.shop}>
                         {/* <p style={{textAlign:'center'}}>Upload Shop Image</p> */}
                         <div className={styles.imgAB}>
-
-                    
-                            
+                           
                             <div>
                             <Field name="imageA">
                             {({input})=>(
@@ -139,7 +136,7 @@ const Signup2 = () => {
                         
                        
 
-                        <button type="submit" disabled={submitting || pristine}>Sign Up</button>
+                        <button type="submit" >Sign Up</button>
 
                     </form>
                 )}
