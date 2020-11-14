@@ -45,21 +45,23 @@ model Session {
 model Profile {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  firstName       String   
-  lastName        String   
-  shopName        String   
-  phone           String      
-  whatsapp        String      
-  address         String   
-  city            String   
-  pincode         String      
-  openTime        String   
-  closeTime       String   
-  maxOrderAcceptTime String   
+  firstName       String?   
+  lastName        String?   
+  shopName        String?   
+  phone           String?      
+  whatsapp        String?      
+  address         String?   
+  city            String?   
+  pincode         String?      
+  openTime        String?   
+  closeTime       String?   
+  maxOrderAcceptTime String?   
   longitude       String?   
   latitude        String?   
   user            User    @relation(fields: [userId], references: [id]) 
   userId          Int 
+  imageA          String?
+  imageB          String?
   @@id([userId])   
 }
 
