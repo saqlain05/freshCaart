@@ -42,7 +42,9 @@ const FooterPrice = () => {
             <div className={styles.mainDivs}>
               <div className={styles.mainDiv}>
               <div className={styles.google}>
-                <p>Total Quantity Should be more than <span> {maxQty} KG </span></p>
+                  <div className={styles.animatedPara}>
+                <p >Total Quantity Should be more than <span> {maxQty} KG </span></p></div>
+                
                 </div>
                 <div className={styles.google2}>
                 <div className={styles.first}>
