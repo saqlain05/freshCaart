@@ -47,7 +47,9 @@ const FooterCart = () => {
             <div className={styles.mainDivs}>
               <div className={styles.mainDiv}>
               <div className={styles.google}>
-                <p>Total Quantity Should be more than <span> {maxQty} KG </span></p>
+              <div className={styles.animatedPara}>
+                <p >Total Quantity Should be more than <span> {maxQty} KG </span></p></div>
+                {/* <p>Total Quantity Should be more than <span> {maxQty} KG </span></p> */}
                 </div>
                 <div className={styles.google2}>
                 

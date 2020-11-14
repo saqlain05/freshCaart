@@ -23,8 +23,13 @@
         margin-top: .3rem;
         width: 100%;
 
-        p{
-            color: white;
+        
+.animatedPara {
+    width:100%;
+    overflow:hidden;
+    p{
+        animation: animatedPara 10s;
+        color: white;
             text-transform: capitalize;
             text-align: center;
 
@@ -32,7 +37,34 @@
                 color: yellow;
                 font-weight: 800;
             }
-        }
+    }
+  }
+
+  
+  @keyframes animatedPara {
+    from {
+      margin-left: 100%;
+      width: 300%; 
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+
+        // p{
+        //     color: white;
+        //     text-transform: capitalize;
+        //     text-align: center;
+
+        //     span{
+        //         color: yellow;
+        //         font-weight: 800;
+        //     }
+        // }
+
+        
     }
 
     .google2{
