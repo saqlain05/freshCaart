@@ -4,8 +4,21 @@ import Layout from "app/layouts/Layout"
 import { LoginForm } from "app/auth/components/LoginForm"
 import getCarts from "app/carts/queries/getCarts"
 import cookie from 'js-cookie'
+import { parseCookies } from "nookies"
 
-export const getServerSideProps: GetServerSideProps = async () =>  {
+export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
+  const {token} = parseCookies(ctx)
+  if(token) {
+    console.log('Here')
+    const {res} = ctx
+    res.writeHead(302, {Location: '/products'})
+    res.end()
+    return {
+      props: {
+        data: JSON.stringify(res)
+      }
+    }
+  }
   const carts =  JSON.stringify(await getCarts({include: {product: true}}))
   const data = JSON.parse(carts)
   console.log(data)
