@@ -25,7 +25,7 @@ const index = () => {
         handleLogout()
       }
     }
-  }, [])
+  }, [value])
   return (
     <div>
       <div className={styles.mainDiv}>
