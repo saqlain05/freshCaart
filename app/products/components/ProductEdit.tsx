@@ -8,11 +8,13 @@ import { Form, Field } from "react-final-form"
 import styles from '../../styles/Edit.module.scss'
 import AddImg from "./AddImg"
 
-const ProductEdit = () => {
+const ProductEdit = ({value}) => {
     let saqimage
-    const [img, setImg] = useState('')
+    const [img, setImg] = useState(value.imageUrl)
+    console.log(img)
 
     const uploadFile = async (e) => {
+        e.preventDefault()
        const files = e.target.files
        const data = new FormData()
        data.append('file', files[0])
@@ -22,100 +24,38 @@ const ProductEdit = () => {
             body:data
        })
        const file = await res.json()
-    //    console.log(file.secure_url)
+        console.log(file.secure_url)
        setImg(file.secure_url)
        
-    //    console.log(img)
+       console.log(img)
     }
     
   const router = useRouter()
-  const productId = useParam("productId", "number")
-  const [product, { mutate }] = useQuery(getProduct, { where: { id: productId }, include: {category: true} })
   const [updateProductMutation] = useMutation(updateProduct)
-  const productimg = product.imageUrl;
+  const productimg = value.imageUrl;
 
   const onSubmit = async (formObj) => {
-      {formObj.imageUrl ? formObj.imageUrl : formObj.imageUrl = formObj.imageUrt }
-    // formObj.imageUrl = formObj.imageUrt
-    //   saqimage = img
-
-      
-    //   console.log( "image" ,saqimage)
+    console.log(formObj)  
     try {
         let stockType = false
         if(formObj.stock==='1'){
             stockType=true
         }
-        if(formObj.imageUrl){
-            if(formObj.imageUrt){
-                const updated = await updateProduct({
-                    where: { id: product.id },
-                    data: { 
-                            name: formObj.name,
-                        //    imageUrl: formObj.imageUrl,
-                            imageUrl: img,
-                           price: parseFloat(formObj.price),
-                           minQuantity: parseInt(formObj.minQuantity),
-                           measureUnit: formObj.measureUnit,
-                           description: formObj.description,
-                           stock: stockType,
-                           category : {connect : {id: parseInt(formObj.category)}},
-                        //    {include:{category:(true)}}
-                        
-                    }
-                })
-                mutate(product)
-                // router.push("/posts/[postId]", `/posts/${updated.id}`)
-                router.push("/products")
-    
-
+        const updated = await updateProductMutation({
+            where: {id: value.id},
+            data: {
+                category: {connect: {id: parseInt(formObj.categoryId)}},
+                imageUrl: img,
+                measureUnit: formObj.measureUnit,
+                minQuantity: Number(formObj.minQuantity),
+                name: formObj.name,
+                price: Number(formObj.price),
+                stock: stockType,
+                description: formObj.description
             }
-            else{
-                const updated = await updateProduct({
-                    where: { id: product.id },
-                    data: { 
-                            name: formObj.name,
-                        //    imageUrl: formObj.imageUrl,
-                            // imageUrl: img,
-                           price: parseFloat(formObj.price),
-                           minQuantity: parseInt(formObj.minQuantity),
-                           measureUnit: formObj.measureUnit,
-                           description: formObj.description,
-                           stock: stockType,
-                           category : {connect : {id: parseInt(formObj.category)}},
-                        //    {include:{category:(true)}}
-                        
-                    }
-                })
-                mutate(product)
-                // router.push("/posts/[postId]", `/posts/${updated.id}`)
-                router.push("/products")
-    
-            }
-            
-        }
-        else{
-            const updated = await updateProduct({
-                where: { id: product.id },
-                data: { 
-                        name: formObj.name,
-                    //    imageUrl: formObj.imageUrl,
-                       imageUrl: img,
-                       price: parseFloat(formObj.price),
-                       minQuantity: parseInt(formObj.minQuantity),
-                       measureUnit: formObj.measureUnit,
-                       description: formObj.description,
-                       stock: stockType,
-                       category : {connect : {id: parseInt(formObj.category)}},
-                    //    {include:{category:(true)}}
-                    
-                }
-            })
-            mutate(product)
-            // router.push("/posts/[postId]", `/posts/${updated.id}`)
-            router.push("/products")
-        }
-       
+        })
+        console.log(updated)
+        router.push('/products')
     } catch (error) {
         alert("Error creating article " + JSON.stringify(error, null, 2))
     }}
@@ -127,9 +67,9 @@ const ProductEdit = () => {
             <h3>Edit Product</h3>
              <Form
                 onSubmit={onSubmit}
-                initialValues={product}
+                initialValues={value}
             >
-                {({ handleSubmit, submitting, pristine }) => (
+                {({ handleSubmit}) => (
                     <form onSubmit={handleSubmit} className={styles.formDiv}>
 
                         <div>
@@ -143,7 +83,7 @@ const ProductEdit = () => {
                         </div>
                         <div>
                             <p>Product Image</p>
-                        <img src={productimg} alt="missing image"  style={{width:'10rem', height:'10rem'}} />
+                        <img src={productimg || ''} alt="missing image"  style={{width:'10rem', height:'10rem'}} />
                         {/* <a href="">edit</a> */}
                         </div>
                         <Field name="imageUrt">
@@ -155,30 +95,6 @@ const ProductEdit = () => {
                           { img!='' && 
                            <img src={img} style={{width:'10rem', height:'10rem'}} />
                         }
-                        
-
-                        {/* <div style={{display:'none'}}> */}
-                        {/* <Field name="imageUrl">
-                            {({input})=>(
-                                <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
-                            )}
-                        </Field> */}
-                        {/* </div> */}
-
-                       
-                       
-                       
-                          
-
-                        {/* <div>
-                            <Field
-                                name="imageUrl"
-                                component="input"
-                                type="file"
-                                placeholder="Blog Title"
-                                onChange={(e) => uploadFile(e)}
-                            />
-                        </div> */}
                         <div>
                             <Field
                                 name="price"
@@ -215,7 +131,7 @@ const ProductEdit = () => {
                              <option value="1">In Stock</option>
                              <option value="2">Out of Stock</option>
                         </Field>
-                        <Field name="category" component="select" className={styles.select}>
+                        <Field name="categoryId" component="select" className={styles.select}>
                              <option>Select category</option>
                              <option value="1">Fruits</option>
                              <option value="2">Vegetables</option>
