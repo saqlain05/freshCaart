@@ -25,6 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) =>  {
   trueData = JSON.parse(check)
   return {
     props: {
+      trueData,
       data : trueData.firstName === null ? true : false,
       url: ctx.req.headers.referer === undefined ? 'test' : ctx.req.headers.referer
     }
@@ -47,10 +48,11 @@ const ProfilesPage: BlitzPage = (props) => {
   let url
   url = props
   console.log(url.url)
+  console.log(url.trueData)
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        {url.data ? <ProfilesList url={url.url}/> : <Profile2 /> }
+        {url.data ? <ProfilesList url={url.url}/> : <Profile2 profile={url.trueData}/> }
         
       </Suspense>
     </div>

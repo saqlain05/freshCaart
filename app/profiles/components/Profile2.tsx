@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Field } from "react-final-form"
-import { Link, useParam, useQuery, useRouter, useSession } from "blitz"
+import { Link, useMutation, useParam, useQuery, useRouter, useSession } from "blitz"
 import getProfile from '../queries/getProfile'
 import updateProfile from '../mutations/updateProfile'
 import { useCurrentUser } from 'app/hooks/useCurrentUser'
@@ -8,20 +8,51 @@ import styles from '../../styles/Edit.module.scss'
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Profile2 = () => {
-    // const productimg = value.imageA;
-    
+const Profile2 = ({profile}) => {
+    const [updateProfileMutation] = useMutation(updateProfile)   
+    const [img, setImg] = useState(profile.imageA) 
+    const [img1, setImg1] = useState(profile.imageB) 
     const router = useRouter()
-    const postId = useSession().userId
     const uid = useCurrentUser();
-    const sqid = uid?.id;
-    const [profile, { mutate }] = useQuery(getProfile, { where: { userId: sqid } })
-    const imgSaq1 = (profile?.imageA)
-    const imgSaq2 = (profile?.imageB)
+    const imgSaq1 = (profile.imageA)
+    const imgSaq2 = (profile.imageB)
+
+    const uploadFile = async (e) => {
+        e.preventDefault()
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'fileUpload')
+        const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+             method:"Post",
+             body:data
+        })
+        const file = await res.json()
+     //    console.log(file.secure_url)
+        setImg(file.secure_url)
+     //    console.log(img)
+     }
+
+    const uploadFile1 = async (e) => {
+        e.preventDefault()
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'fileUpload')
+        const res = await fetch("https://api.cloudinary.com/v1_1/dlccpotyg/image/upload", {
+             method:"Post",
+             body:data
+        })
+        const file = await res.json()
+     //    console.log(file.secure_url)
+        setImg1(file.secure_url)
+     //    console.log(img)
+    }
+
     const onSubmit = async (formObj) => {
         try {
-            const updated = await updateProfile({
-                where: { userId: postId },
+            const updated = await updateProfileMutation({
+                where: { userId: profile.userId },
                 data: { 
                     address: formObj.address,
                     city: formObj.city,
@@ -34,11 +65,10 @@ const Profile2 = () => {
                     pincode: (formObj.pincode).toString(),
                     shopName: formObj.shopName,
                     whatsapp: (formObj.whatsapp).toString(),
-                    // imageA: img,
-                    // imageB: img1,
+                    imageA: img,
+                    imageB: img1,
                  },
             })
-            mutate(profile)
             // router.push("/posts/[postId]", `/posts/${updated.id}`)
             alert("profile Edit Successfully")
             router.push("/products")
@@ -56,7 +86,7 @@ const Profile2 = () => {
                 onSubmit={onSubmit}
                 initialValues={profile}
             >
-                {({ handleSubmit, submitting, pristine }) => (
+                {({ handleSubmit}) => (
                     <form onSubmit={handleSubmit} className={styles.formDiv}>
                     <div>
                         <label>First Name</label>
@@ -86,56 +116,33 @@ const Profile2 = () => {
                                 placeholder="Shop Name"
                             />
                         </div>
-                        <div style={{margin:'1rem 0'}}>
-                            <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <p style={{textAlign:'center', color:'green', marginBottom:'1rem'}}>Shop Image</p>
-                        <p><Link href="/profiles/image"><a style={{textDecoration:'none', color:'green', cursor:'pointer'}}>
-                           <FontAwesomeIcon icon={faPen}  />
-                            </a></Link></p>
-                        </div>
-                        <div style={{display:'flex', justifyContent:'center', gap:'1rem'}}>
-                        <img src={imgSaq1} alt="missing image" style={{width:'6rem', height:'6rem'}} />
-                        <img src={imgSaq2} alt="missing image" style={{width:'6rem', height:'6rem'}} />
-                        </div>
-                        </div>
-                        {/* <div className={styles.shop} style={{border: '2px solid green', margin:'1rem 0', padding:'.5rem'}}>
-                        <p style={{textAlign:'center'}}>Upload Shop Image</p>
-                        <div className={styles.imgAB}>
-                            
-                            <div>
-                            <Field name="imageA">
+                        <div style={{width:'70%', margin:'auto'}}>
+                        <img src={imgSaq1 || ''} alt="SomeThing went wrong upload again" style={{width:'6rem', height:'6rem'}}/>
+                        <Field name="imagesA">
                             {({input})=>(
                                 <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
                             )}
                         </Field>
                         { img=='' && <p>Upload and wait for image...</p> } 
                           { img!='' && 
-                        //    <>
-                           <img src={img} style={{width:'10rem', height:'10rem'}} />
-                        //    </>
+                           <img src={img} style={{width:'6rem', height:'6rem'}} />
                         }
-                            </div>
-                       
-                        <div>
-                        <Field name="imageB">
+                        </div>
+                        <div style={{margin:'1rem 0'}}>
+                        <div style={{width:'70%', margin:'auto'}}>
+                        <img src={imgSaq2 || ''} alt="SomeThing went wrong upload again" style={{width:'6rem', height:'6rem'}}/>
+                            <Field name="imagesB">
                             {({input})=>(
                                 <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile1(e)}/>
                             )}
                         </Field>
                         { img1=='' && <p>Upload and wait for image...</p> } 
                           { img1!='' && 
-                        //    <>
-                           <img src={img1} style={{width:'10rem', height:'10rem'}} />
-                        //    </>
+                           <img src={img1} style={{width:'6rem', height:'6rem'}} />
                         }
-                        </div>
-                        </div>
-                        </div>
-                    */}
                            
-                           
-                       
-
+                       </div>
+                       </div>
                         <div>
                             <label htmlFor="">Address</label>
                             <Field
@@ -174,17 +181,7 @@ const Profile2 = () => {
                                 placeholder="Phone"
                             />
                         </div>
-                        
-                        {/* <div>
-                            <Field
-                                name="address"
-                                component="input"
-                                type="text"
-                                placeholder="Image Url"
-                            />
-                        </div> */}
-                       
-                      
+
                         <div>
                             <label htmlFor="">Shop Open Time</label>
                             <Field
@@ -212,12 +209,9 @@ const Profile2 = () => {
                                 placeholder="Max Order Accept Time"
                             />
                         </div>
-
-                        
-
-                            <button type="submit">
-                               Update Profile
-                            </button>
+                        <button type="submit">
+                            Update Profile
+                        </button>
                         
                     </form>
                 )}
