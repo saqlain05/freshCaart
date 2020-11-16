@@ -37,9 +37,9 @@ const ProductEdit = ({value}) => {
   const onSubmit = async (formObj) => {
     console.log(formObj)  
     try {
-        let stockType = false
-        if(formObj.stock==='1'){
-            stockType=true
+        let stockType = true
+        if(formObj.stock==='2'){
+            stockType=false
         }
         const updated = await updateProductMutation({
             where: {id: value.id},
@@ -127,7 +127,7 @@ const ProductEdit = ({value}) => {
                         </Field>
 
                         <Field name="stock" component="select" className={styles.select}>
-                             <option >Select Stocks availability</option>
+                             <option>Select Stocks availability</option>
                              <option value="1">In Stock</option>
                              <option value="2">Out of Stock</option>
                         </Field>
@@ -137,7 +137,6 @@ const ProductEdit = ({value}) => {
                              <option value="2">Vegetables</option>
                         </Field>
                         
-                        <p style={{color:'red', fontSize:'.8rem', fontWeight:'bold'}}>**You Have To Select Category</p>
                         
                             <button type="submit">
                                 Edit Product
