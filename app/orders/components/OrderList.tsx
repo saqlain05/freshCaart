@@ -11,8 +11,7 @@ const OrderList = ({orderss}) => {
             <div className={styles.orders} key={orderss.id}>
                 <div className={styles.title}>
                     <h2 className={styles.head1}>Order No.  </h2>
-                    <h2 className={styles.head1}>Order Date</h2>
-                    <br/>
+                    <h2 className={styles.head11}>Order Date</h2>
                     <h2 className={styles.head1}>Order Amount</h2>
                     <h2 className={styles.head1}>Total Products</h2>
                 </div>
@@ -26,7 +25,7 @@ const OrderList = ({orderss}) => {
 
                 <div className={styles.button}>
                     <button className={styles.headPending}>{orderss.orderStatus}</button>
-                    <button onClick={() => setView(!view)}>View Details</button>
+                    <button className={styles.det} onClick={() => setView(!view)}>View Details</button>
                 </div>
                 <br/>
             </div>

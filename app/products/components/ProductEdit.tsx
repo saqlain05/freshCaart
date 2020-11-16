@@ -78,7 +78,7 @@ const ProductEdit = ({value}) => {
                                 name="name"
                                 component="input"
                                 type="text"
-                                placeholder="Blog Title"
+                                placeholder="Product Name"
                             />
                         </div>
                         <div>
@@ -100,7 +100,7 @@ const ProductEdit = ({value}) => {
                                 name="price"
                                 component="input"
                                 type="text"
-                                placeholder="Blog Title"
+                                placeholder="Product Image"
                             />
                         </div>
                         <div>
@@ -108,7 +108,7 @@ const ProductEdit = ({value}) => {
                                 name="minQuantity"
                                 component="input"
                                 type="text"
-                                placeholder="Blog Title"
+                                placeholder="Product Minimum Quantity"
                             />
                         </div>
                         <div>
@@ -116,7 +116,7 @@ const ProductEdit = ({value}) => {
                                 name="description"
                                 component="input"
                                 type="text"
-                                placeholder="Blog Title"
+                                placeholder="Product Description"
                             />
                         </div>
 
