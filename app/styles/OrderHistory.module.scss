@@ -26,10 +26,10 @@
             width: 10rem;
             background-color: #ffff;
 
-            .head1{
+            .head1, .head11{
                 font-size: .6rem;
                 font-weight: 500;
-                margin-top: .1rem;
+                margin-top: .2rem;
                 background-color: #ffff;
 
             }
@@ -76,18 +76,23 @@
             }
 
             .headPending{
-                width: 5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 6rem;
                 border-radius: 20px;
                 background-color: #F8C84C;
                 color: Black;
-                padding: 2px 5px;
+                padding: 3px 5px;
                 border: none;
                 margin-top: .5rem;
                 font-weight: 700;
 
             }
 
-            .headDeliver{
+            
+
+            .headDeliver, .det{
                 width: 5rem;
                 border-radius: 20px;
                 background-color: #17B871;
@@ -98,6 +103,21 @@
                 font-weight: 500;
 
             }
+
+            .det{
+                background-color: #085032;
+                width: 6rem;
+                padding: .4rem 0;
+                outline: none;
+                cursor: pointer;
+            }
         }
     }
+}
+
+@media only screen and (max-width: 768px) {
+    .head11{
+        margin-bottom: 1.1rem;
+    }
+
 }

@@ -67,7 +67,8 @@ const OrdersPage: BlitzPage = (props) => {
           <h1 style={{margin: '1rem 0'}}> Order Details </h1>
             <h2 style={{margin: '1rem 0', textTransform:'capitalize'}}><b>{value.profile.shopName} </b></h2>
             <p style={{margin: '1rem 0'}}>{value.profile.address}, {value.profile.city} </p>
-            <p style={{margin: '1rem 0'}}>Payment Mode - <b>Cash On Delivary</b> (COD) </p>
+            {/* <p style={{margin: '1rem 0'}}>Payment Mode - <b>Cash On Delivary</b> (COD) </p> */}
+            <p style={{margin: '1rem 0'}}>Payment Mode <br/> <br/> <input type="radio" id="male" name="cod" value="COD" /> <b>Cash On Delivary</b> (COD)</p>
           </div>
           
           <PlaceOrder profile={value.profile} userId={userId}/>

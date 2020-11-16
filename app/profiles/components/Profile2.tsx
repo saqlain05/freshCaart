@@ -116,6 +116,7 @@ const Profile2 = ({profile}) => {
                                 placeholder="Shop Name"
                             />
                         </div>
+                        <h2 style={{textAlign:'center', marginTop:'1rem'}}>SHOP IMAGE</h2>
                         <div style={{width:'70%', margin:'auto'}}>
                         <img src={imgSaq1 || ''} alt="SomeThing went wrong upload again" style={{width:'6rem', height:'6rem'}}/>
                         <Field name="imagesA">
@@ -123,6 +124,7 @@ const Profile2 = ({profile}) => {
                                 <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile(e)}/>
                             )}
                         </Field>
+                        <p style={{margin:'.5rem 0'}}>Image Perview</p>
                         { img=='' && <p>Upload and wait for image...</p> } 
                           { img!='' && 
                            <img src={img} style={{width:'6rem', height:'6rem'}} />
@@ -136,6 +138,7 @@ const Profile2 = ({profile}) => {
                                 <input placeholder="Enter Image URL" type="file" {...input} onChange={(e) => uploadFile1(e)}/>
                             )}
                         </Field>
+                        <p style={{margin:'.5rem 0'}}>Image Perview</p>
                         { img1=='' && <p>Upload and wait for image...</p> } 
                           { img1!='' && 
                            <img src={img1} style={{width:'6rem', height:'6rem'}} />
